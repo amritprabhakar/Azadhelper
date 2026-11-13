@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata Maker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+    <style>
+        /* Soft Pastel Shimmer Animated Background */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(-45deg, #fdfbfb, #f3e7ff, #eaf4ff, #fff5f7);
+            background-size: 400% 400%;
+            animation: smoothBG 2s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Smooth Gradient Movement */
+        @keyframes smoothBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Soft Glow Overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1), transparent 60%),
+                        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1), transparent 60%);
+            z-index: -1;
+        }
+
+        /* Clean Modern Inputs */
+        .clean-input {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        .clean-input:focus {
+            outline: none;
+            background: #fff;
+            border: 4px solid #000;
+            box-shadow: none;
+        }
+
+        /* Clean Buttons */
+        .clean-btn {
+            background: #fff;
+            border: 1px solid #ddd;
+            color: #333;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .clean-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+        .clean-btn-primary {
+            background: #3b82f6; 
+            color: #fff;
+            border: none;
+            box-shadow: none; 
+        }
+        .clean-btn-primary:hover {
+            background: #3b82f6; 
+            box-shadow: none;
+        }
+        
+        /* Step Transitions */
+        .step-container { display: none; animation: fadeIn 0.5s ease; }
+        .step-container.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
+
+        /* Biodata Document Base */
+        .biodata-document {
+            width: 794px; 
+            min-height: 1123px; 
+            background-color: white;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+            box-sizing: border-box;
+            color: #222; 
+            flex-shrink: 0; 
+        }
+
+        /* Fixed Centered Preview Layout */
+        #scrollWrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .preview-scale { 
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* Scrollbar for preview */
+        .custom-scrollbar::-webkit-scrollbar { width: 8px; height: 8px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.3); border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.2); border-radius: 4px; }
+        
+        /* Drag & Drop zone */
+        .upload-icon {
+            width: 140px;
+            height: 180px; 
+            margin: 0 auto;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0px; 
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            transition: 0.3s ease;
+        }
+
+        .upload-icon:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* icon */
+        .upload-icon .icon {
+            font-size: 35px;
+            margin-bottom: 4px;
+        }
+
+        /* text */
+        .upload-icon p {
+            font-size: 13px;
+            color: #666;
+        }
+    
+        #dropZone {
+            width: 140px;
+            height: 180px; 
+            margin: 10px auto;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px dashed #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* preview container */
+        #photoPreviewContainer {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* image */
+        #photoPreview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+        }
+        
+        #replacePhotoBtn {
+            animation: floatBtn 2s ease-in-out infinite;
+        }
+
+        @keyframes floatBtn {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Share Menu Style */
+        .share-menu {
+          position: relative;
+          width: 200px;
+          height: 200px;
+          margin: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* CENTER BUTTON */
+        .share-menu .toggle {
+          width: 60px;
+          height: 60px;
+          background: #fff;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 2rem;
+          cursor: pointer;
+          z-index: 10;
+        }
+
+        /* ICONS DEFAULT HIDE */
+        .share-menu li {
+          position: absolute;
+          list-style: none;
+          transform: rotate(calc(360deg/4 * var(--i))) translate(0px);
+          transform-origin: center;
+          opacity: 0;
+          pointer-events: none;
+          transition: 0.4s;
+        }
+
+        /* ACTIVE ROUND OPEN */
+        .share-menu.active li {
+          transform: rotate(calc(360deg/4 * var(--i))) translate(80px);
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        /* ICON STYLE */
+        .share-menu li a {
+          transform: rotate(calc(360deg/-4 * var(--i)));
+          width: 50px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: #fff;
+          color: var(--clr);
+          font-size: 1.5rem;
+        }
+
+        .text-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 44px; 
+            font-weight: 800; 
+            color: #000000;
+            letter-spacing: -1.5px; 
+            margin: 0;
+            margin-left: 8px; 
+            line-height: 1.1;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body class="antialiased pb-20">
+   
+    <section id="headerSection" class="text-left py-8 px-4">
+        <h1 class="text-logo">
+            Azad vault
+        </h1>
+        <p class="text-gray-500 text-sm tracking-widest pl-[16px] uppercase mt-1">
+            Biodata Maker
+        </p>
+        <p class="text-gray-500 text-sm tracking-widest pl-[16px] uppercase mt-1">
+            Fill your details 
+        </p>
+    </section>
+
+    <main id="step1" class="step-container active w-full px-4 mt-2">
+        <form id="biodataForm" class="glass-container rounded-2xl p-6 sm:p-10 max-w-4xl mx-auto">
+            
+            <div class="mb-10 mt-4">
+                <div id="dropZone" class="upload-icon">
+                    <input type="file" id="photoInput" accept="image/*" hidden>
+                    <div id="uploadText" class="upload-icon">
+                        <div class="icon">
+                            <img src="https://i.ibb.co/jkk47PWW/upload-square-black-icon.png" alt="Upload Icon" width="40">
+                        </div>
+                        <p>Add photo</p>
+                    </div>
+                    <div id="photoPreviewContainer" class="hidden">
+                        <img id="photoPreview">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex justify-center mt-3">
+                <button type="button" id="replacePhotoBtn"
+                    class="hidden px-4 py-2 rounded-md text-sm font-semibold 
+                    bg-blue-500 text-white 
+                    hover:bg-blue-600 active:bg-blue-700 
+                    transition">
+                    🔄 Change Photo
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Full Name *</label>
+                    <input type="text" id="nameInput" required class="w-full px-4 py-2.5 rounded-lg clean-input" placeholder="Enter full name">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-1">Date of Birth *</label>
+                    <input type="date" id="dobInput" required class="w-full px-4 py-2.5 rounded-lg clean-input">
+                </div>
+            </div>
+
+            <div id="optionalFields"></div>
+            
+            <div class="mt-10 flex justify-center">
+                <button type="submit" class="clean-btn-primary font-bold py-3.5 px-10 rounded-full text-lg tracking-wide flex items-center gap-2 transition duration-300">
+                    Next Step
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <main id="step2" class="step-container relative pt-4">
+        
+        <div class="max-w-4xl mx-auto glass-container rounded-2xl p-4 mb-6">
+            <div class="preview-wrapper w-full h-[65vh] overflow-auto custom-scrollbar bg-gray-100/50 rounded-lg p-4" id="scrollWrapper">
+                
+                <div class="preview-scale" id="previewScaleBox">
+                    <div id="renderDocument" class="biodata-document shadow-xl relative rounded-sm">
+                        
+                        <div id="renderPhotoContainer" class="absolute top-12 right-12 w-32 h-40 border-4 border-white shadow-md overflow-hidden hidden z-10">
+                            <img id="renderPhoto" class="w-full h-full object-cover" src="" alt="Profile">
+                        </div>
+
+                        <div class="p-16 pt-20 bg-transparent min-h-full z-0">
+                            <div id="religionLine" class="text-center text-orange-600 font-bold text-xl mb-4 hidden"></div>
+                            
+                            <h1 id="out-name" class="text-4xl font-bold text-gray-900 border-b-2 border-gray-400 pb-2 mb-4 w-max"></h1>
+                            
+                            <div id="dynamic-content-area" class="text-[17px] text-gray-800"></div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed bottom-20 left-0 w-full z-40 bg-amber-50/90 backdrop-blur-md border-t border-gray-200 rounded-t-[50px]">
+            <div class="max-w-4xl mx-auto px-2 py-2">
+                <h3 class="text-gray-800 font-bold mb-2 px-2 text-center px-6">Select Template</h3>
+                
+                <div class="flex gap-4 overflow-x-auto custom-scrollbar pb-2 px-2" id="templateGrid">
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed bottom-0 left-0 w-full border-t border-gray-200 bg-amber-50 z-50 h-20 flex items-center px-4 ">
+            <div class="max-w-4xl mx-auto flex justify-between gap-4">
+                <button onclick="goToStep(1)" class="flex-1 clean-btn py-3 px-6 rounded-xl font-semibold text-center">
+                    Cancel
+                </button>
+                <button onclick="downloadImage()" id="downloadBtn" class="flex-1 clean-btn-primary font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    <span id="downloadBtnText">Download Image</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="cropModal" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+        <div class="bg-white p-4 rounded-xl w-[90%] max-w-md">
+            
+            <h2 class="text-lg font-bold mb-3 text-center">Crop Photo</h2>
+            
+            <div class="w-full h-64">
+                <img id="cropImage" class="max-w-full">
+            </div>
+
+            <div class="flex gap-3 mt-4">
+                <button id="cancelCrop" class="flex-1 py-2 rounded-lg bg-gray-200">Cancel</button>
+                <button id="applyCrop" class="flex-1 py-2 rounded-lg bg-blue-500 text-white">Apply</button>
+            </div>
+
+        </div>
+    </div>
+    <audio id="clickSound" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3" preload="auto"></audio>
+    
+    <div id="sharePopup" class="fixed bottom-0 left-0 w-full z-50 bg-amber-50/95 backdrop-blur-md border-t border-gray-200 rounded-t-[40px] hidden">
+        <div class="max-w-4xl mx-auto px-4 py-4 text-center">
+            <h3 class="text-gray-800 font-bold mb-3">Share Your Biodata</h3>
+
+            <div class="share-menu" id="shareMenu">
+                <div class="toggle" onclick="nativeShare()">
+                    <ion-icon name="share-social"></ion-icon>
+                </div>
+            </div>
+
+            <button onclick="closeSharePopup()" class="mt-4 text-sm text-gray-500">Close</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/ionicons@5.5.2/dist/ionicons.js"></script>
+    <script>
+        let soundUnlocked = false;
+
+        document.addEventListener("click", function () {
+            if (!soundUnlocked) {
+                const sound = document.getElementById("clickSound");
+                sound.play().then(() => {
+                    sound.pause();
+                    sound.currentTime = 0;
+                    soundUnlocked = true;
+                }).catch(() => {});
+            }
+        });
+        
+        // Global templates array
+        window.templates = window.templates || [];
+        
+        const optionalFieldsConfig = [
+            // Personal Details
+            { id: 'pob', label: 'Place of Birth', placeholder: 'City, State', category: 'Personal Details' },
+            { id: 'rashi', label: 'Rashi', placeholder: 'E.g., Leo, Kanya', category: 'Personal Details' },
+            { id: 'religion', label: 'Religion', placeholder: 'E.g., Hindu', category: 'Personal Details' },
+            { id: 'caste', label: 'Caste', placeholder: 'E.g., Agarwal, Brahmin', category: 'Personal Details' },
+            { id: 'height', label: 'Height', placeholder: 'E.g., 5 ft 8 in', category: 'Personal Details' },
+            { id: 'education', label: 'Education', placeholder: 'Highest degree / Qualification', category: 'Personal Details' },
+            { id: 'occupation', label: 'Occupation', placeholder: 'E.g., Engineer, Student', category: 'Personal Details' },
+            // Family Details
+            { id: 'fatherName', label: "Father's Name", placeholder: 'Full Name', category: 'Family Details' },
+            { id: 'fatherOcc', label: "Father's Occupation", placeholder: 'E.g., Business, Service', category: 'Family Details' },
+            { id: 'motherName', label: "Mother's Name", placeholder: 'Full Name', category: 'Family Details' },
+            { id: 'motherOcc', label: "Mother's Occupation", placeholder: 'E.g., Service, Housewife', category: 'Family Details' },
+            { id: 'brothers', label: "Brothers", placeholder: 'E.g., 2', category: 'Family Details' },
+            { id: 'sisters', label: "Sisters", placeholder: 'E.g., 1', category: 'Family Details' },
+            // Contact Details
+            { id: 'address', label: "Address", placeholder: 'Full residential address', category: 'Contact Details' },
+            { id: 'contact', label: "Contact No.", placeholder: 'Phone Number', category: 'Contact Details' },
+        ];
+
+        let uploadedPhotoDataUrl = null;
+        let selectedTemplateId = null;
+        let cropper;
+        let rawImageData = null;
+        let generatedImageFile = null;
+
+        // Drag & Drop function
+        function initDragAndDrop() {
+            const dropZone = document.getElementById("dropZone");
+            const input = document.getElementById("photoInput");
+            dropZone.addEventListener("click", () => input.click());
+        }
+
+        // Main DOM Load
+        document.addEventListener('DOMContentLoaded', () => {
+            initForm();
+            initDragAndDrop(); 
+            initTemplates();
+
+            const replaceBtn = document.getElementById("replacePhotoBtn");
+
+            // Form Submit
+            document.getElementById('biodataForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                generatePreview();
+                goToStep(2);
+            });
+
+            // Resize
+            window.addEventListener('resize', adjustPreviewScale);
+
+            // Photo Upload
+            document.getElementById("photoInput").addEventListener("change", function () {
+                const file = this.files;
+                if (!file) return;
+
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    rawImageData = e.target.result;
+
+                    const cropModal = document.getElementById("cropModal");
+                    const cropImage = document.getElementById("cropImage");
+
+                    // Set image
+                    cropImage.src = rawImageData;
+
+                    // Show modal
+                    cropModal.classList.remove("hidden");
+
+                    // Load image before cropper
+                    cropImage.onload = function () {
+                        // Destroy old cropper safely
+                        if (cropper) {
+                            cropper.destroy();
+                            cropper = null;
+                        }
+
+                        // New Cropper
+                        cropper = new Cropper(cropImage, {
+                            aspectRatio: 3 / 4,
+                            viewMode: 1,
+                            autoCropArea: 1,
+                            movable: false,
+                            zoomable: false,
+                            scalable: false,
+                            cropBoxResizable: false,
+                            center: true,
+                            highlight: false,
+                            background: false,
+                            responsive: true
+                        });
+                    };
+                };
+
+                reader.readAsDataURL(file);
+            });
+
+            // Cancel
+            document.getElementById("cancelCrop").addEventListener("click", () => {
+                document.getElementById("cropModal").classList.add("hidden");
+                if (cropper) cropper.destroy();
+            });
+
+            // Apply Crop
+            document.getElementById("applyCrop").addEventListener("click", () => {
+                const canvas = cropper.getCroppedCanvas({
+                    width: 300,
+                    height: 400
+                });
+
+                uploadedPhotoDataUrl = canvas.toDataURL("image/png");
+
+                // Preview update
+                document.getElementById("photoPreview").src = uploadedPhotoDataUrl;
+                document.getElementById("photoPreviewContainer").classList.remove("hidden");
+                document.getElementById("uploadText").classList.add("hidden");
+
+                // Show replace button
+                document.getElementById("replacePhotoBtn").classList.remove("hidden");
+
+                // Close modal
+                document.getElementById("cropModal").classList.add("hidden");
+                cropper.destroy();
+            });
+
+            // Replace Photo Button
+            replaceBtn.addEventListener("click", () => {
+                document.getElementById("photoInput").click();
+            });
+        });
+    
+        // Initialize Form
+        function initForm() {
+            const container = document.getElementById('optionalFields');
+            let html = '';
+            
+            const categories = ['Personal Details', 'Family Details', 'Contact Details'];
+
+            categories.forEach(cat => {
+                html += `<h3 class="text-xl font-bold text-gray-800 mt-8 mb-4 border-b border-gray-300 pb-2">${cat}</h3>`;
+                html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
+                
+                const fields = optionalFieldsConfig.filter(f => f.category === cat);
+                fields.forEach(field => {
+                    html += `
+                        <div class="field-group flex items-end gap-2 transition-all duration-300">
+                            <div class="flex-1">
+                                <label class="block text-sm font-semibold text-gray-700 mb-1">${field.label}</label>
+                                <input type="text" data-label="${field.label}" data-category="${cat}" class="w-full px-4 py-2.5 rounded-lg clean-input" placeholder="${field.placeholder}">
+                            </div>
+                            <button type="button" onclick="removeField(this)" class="bg-red-50 hover:bg-red-100 text-red-500 hover:text-red-700 p-2.5 rounded-lg border border-red-200 transition duration-200" title="Delete Field">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                            </button>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        window.removeField = function(btn) {
+            const group = btn.closest('.field-group');
+            group.style.opacity = '0';
+            group.style.transform = 'scale(0.95)';
+            setTimeout(() => group.remove(), 300);
+        }
+
+        // Template Grid
+        window.initTemplates = function() {
+            const grid = document.getElementById('templateGrid');
+            const activeTemplates = window.templates || [];
+            
+            if(activeTemplates.length === 0) {
+                grid.innerHTML = '<p class="text-sm text-gray-600 font-medium bg-white/50 px-4 py-2 rounded-lg">Loading templates...</p>';
+                return;
+            }
+
+            let html = '';
+            activeTemplates.forEach(tpl => {
+                html += `
+                      <div class="flex-shrink-0 w-24 cursor-pointer relative group" onclick="applyTemplate('${tpl.id}')">
+                        <div class="w-full h-32 bg-white rounded-lg overflow-hidden border-2 ${selectedTemplateId === tpl.id ? 'border-blue-500' : 'border-gray-200'} group-hover:border-blue-400 transition duration-300 flex items-center justify-center text-xs text-gray-400 shadow-sm" id="thumb-${tpl.id}">
+                            <img src="${tpl.src}" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                            <span style="display:none">Template ${tpl.id}</span>
+                        </div>
+                        ${selectedTemplateId === tpl.id ? 
+                            '<div class="absolute inset-0 border-4 border-blue-500 rounded-lg z-20 pointer-events-none" id="tick-'+tpl.id+'"></div>' 
+                            : ''
+                        }
+                    </div>
+                `;
+            });
+            grid.innerHTML = html;
+        }
+
+        // Added missing function
+        window.applyTemplate = function(id) {
+            selectedTemplateId = id;
+            
+            // Re-render UI to show selection border properly
+            window.initTemplates();
+
+            const template = window.templates.find(t => t.id == id);
+            const doc = document.getElementById('renderDocument');
+            
+            if(template) {
+                doc.style.backgroundImage = `url('${template.src}')`;
+            } else {
+                doc.style.backgroundImage = 'none';
+            }
+        }
+
+        // Generate the Category Wise Biodata Content
+        function generatePreview() {
+            const nameVal = document.getElementById('nameInput').value;
+            document.getElementById('out-name').innerText = nameVal;
+            
+            // Religion check
+            const religionInput = document.querySelector('input[data-label="Religion"]');
+            const religionValue = religionInput ? religionInput.value.trim().toLowerCase() : "";
+
+            const religionLine = document.getElementById("religionLine");
+
+            if (religionValue === "hindu") {
+                religionLine.innerText = "॥ ॐ श्री गणेशाय नमः ॥";
+                religionLine.classList.remove("hidden");
+            } else {
+                religionLine.innerText = "";
+                religionLine.classList.add("hidden");
+            }
+
+            const photoEl = document.getElementById('renderPhoto');
+            const photoCont = document.getElementById('renderPhotoContainer');
+            if(uploadedPhotoDataUrl) {
+                photoEl.src = uploadedPhotoDataUrl;
+                photoCont.classList.remove('hidden');
+            } else {
+                photoCont.classList.add('hidden');
+            }
+
+            const contentArea = document.getElementById('dynamic-content-area');
+            let contentHtml = '';
+            const categories = ['Personal Details', 'Family Details', 'Contact Details'];
+
+            categories.forEach(cat => {
+                let catHtml = '';
+
+                if(cat === 'Personal Details') {
+                    const dobVal = document.getElementById('dobInput').value;
+                    if(dobVal) {
+                        const dob = new Date(dobVal);
+                        const dobFmt = dob.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+                        if(dobFmt !== "Invalid Date") {
+                            catHtml += `
+                                <div class="flex border-b border-gray-300/50 pb-2 mb-2">
+                                    <div class="w-44 font-semibold text-gray-700">Date of Birth</div>
+                                    <div class="px-2">:</div>
+                                    <div class="flex-1 text-gray-900 break-words">${dobFmt}</div>
+                                </div>`;
+                        }
+                    }
+                }
+
+                const inputs = document.querySelectorAll(`#optionalFields input[data-category="${cat}"]`);
+                inputs.forEach(input => {
+                    if(input.value.trim() !== '' && input.closest('.field-group')) { 
+                        const label = input.getAttribute('data-label');
+                        catHtml += `
+                            <div class="flex border-b border-gray-300/50 pb-2 mb-2">
+                                <div class="w-44 font-semibold text-gray-700 whitespace-nowrap">${label}</div>
+                                <div class="px-2">:</div>
+                                <div class="flex-1 text-gray-900 break-words">${input.value}</div>
+                            </div>`;
+                    }
+                });
+
+                if(catHtml !== '') {
+                    contentHtml += `
+                        <div class="mb-6 mt-2">
+                            <h3 class="text-xl font-bold text-orange-600 border-b-2 border-orange-300 inline-block pr-10 mb-3">${cat}</h3>
+                            <div class="pl-2 space-y-1">
+                                ${catHtml}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            contentArea.innerHTML = contentHtml;
+
+            if(selectedTemplateId) applyTemplate(selectedTemplateId);
+        }
+
+        // Flow & Scalable Stable Preview
+        window.goToStep = function(stepNumber) {
+            document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+            document.getElementById('step' + stepNumber).classList.add('active');
+
+            const header = document.getElementById('headerSection');
+            if(stepNumber === 1){
+                header.style.display = 'block';
+            } else {
+                header.style.display = 'none';
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (stepNumber === 2) setTimeout(adjustPreviewScale, 100); 
+        }
+
+        function adjustPreviewScale() {
+            if (document.getElementById('step2').classList.contains('active')) {
+                const wrapper = document.getElementById('scrollWrapper');
+                const doc = document.getElementById('renderDocument');
+                const scaleBox = document.getElementById('previewScaleBox');
+                const docWidth = 794; 
+
+                const availableWidth = wrapper.clientWidth - 32; 
+                
+                if (availableWidth < docWidth) {
+                    const scale = availableWidth / docWidth;
+                    doc.style.transform = `scale(${scale})`;
+                    doc.style.transformOrigin = 'top center';
+                    scaleBox.style.height = `${1123 * scale}px`;
+                } else {
+                    doc.style.transform = 'scale(1)';
+                    scaleBox.style.height = '1123px';
+                }
+            }
+        }
+
+        // Download Image (html2canvas)
+        window.downloadImage = async function() {
+            const btn = document.getElementById('downloadBtn');
+            const btnText = document.getElementById('downloadBtnText');
+            const originalText = btnText.innerText;
+            
+            btnText.innerHTML = 'Generating... <span class="animate-pulse">⏳</span>';
+            btn.classList.add('opacity-50', 'pointer-events-none');
+
+            const elementToCapture = document.getElementById('renderDocument');
+            
+            const originalTransform = elementToCapture.style.transform;
+            elementToCapture.style.transform = 'scale(1)';
+            
+            try {
+                await new Promise(r => setTimeout(r, 150));
+
+                const canvas = await html2canvas(elementToCapture, {
+                    scale: 2, 
+                    useCORS: true, 
+                    backgroundColor: "#ffffff",
+                    allowTaint: true
+                });
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                generatedImageFile = new File([blob], "biodata.png", { type: "image/png" });
+                const imgData = URL.createObjectURL(blob);
+                const nameStr = document.getElementById('nameInput').value || 'User';
+                
+                const link = document.createElement('a');
+                link.download = `${nameStr.replace(/\s+/g, '_')}_Biodata.png`;
+                link.href = imgData;
+                link.click();
+
+            } catch (error) {
+                console.error("Download Error:", error);
+                alert("An error occurred during image generation. Please ensure you are running on a local server.");
+            } finally {
+                elementToCapture.style.transform = originalTransform;
+                btnText.innerText = originalText;
+                btn.classList.remove('opacity-50', 'pointer-events-none');
+                
+                // Show share popup
+                openSharePopup();
+            }
+        }
+        
+        // Play sound on every click
+        document.addEventListener("click", function (e) {
+            const sound = document.getElementById("clickSound");
+
+            if (
+                e.target.closest("button") ||
+                e.target.closest("[onclick]") ||
+                e.target.closest(".cursor-pointer")
+            ) {
+                if (soundUnlocked) {
+                    sound.currentTime = 0;
+                    sound.play().catch(() => {});
+                }
+            }
+        });
+    
+        // Share Menu Fix
+        const shareMenu = document.querySelector(".share-menu");
+
+        // Open Popup
+        function openSharePopup(){
+            document.getElementById("sharePopup").classList.remove("hidden");
+        }
+
+        // Close Popup
+        function closeSharePopup(){
+            document.getElementById("sharePopup").classList.add("hidden");
+        }
+
+        // Share Links
+        async function nativeShare() {
+            if (!generatedImageFile) {
+                alert("Please download the image first!");
+                return;
+            }
+
+            if (navigator.canShare && navigator.canShare({ files: [generatedImageFile] })) {
+                try {
+                    await navigator.share({
+                        title: "My Biodata",
+                        files: [generatedImageFile]
+                    });
+                } catch (err) {
+                    console.log(err);
+                }
+            } else {
+                alert("Device does not support native sharing.");
+            }
+        }
+    
+    </script>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAhjIHv-buPd9HK3Uf52VLxwwJFIZe1H5Y",
+            authDomain: "amritone-4bdcd.firebaseapp.com",
+            projectId: "amritone-4bdcd",
+            storageBucket: "amritone-4bdcd.firebasestorage.app",
+            messagingSenderId: "500948842891",
+            appId: "1:500948842891:web:36eb457b02445fa3d4978e",
+            measurementId: "G-ZSJ73XSSNQ"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadTemplates() {
+            try {
+                const snapshot = await getDocs(collection(db, "templates"));
+                // Clear array to remove old data
+                window.templates.length = 0; 
+                
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    window.templates.push({
+                        id: data.id || doc.id,
+                        src: data.src
+                    });
+                });
+
+                // Refresh UI with new templates
+                if (typeof window.initTemplates === "function") {
+                    window.initTemplates();
+                }
+            } catch (error) {
+                console.error("Error loading templates from Firebase:", error);
+            }
+        }
+
+        // Call loadTemplates on script load
+        loadTemplates();
+    </script>
+</body>
+</html>
