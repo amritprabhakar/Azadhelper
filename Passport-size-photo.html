@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passport Sizer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Minimalist Gemini-like Styles */
+        body { 
+            background-color: #f0f4f9; /* Soft light gray background */
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            color: #1f2937;
+        }
+        .gemini-card {
+            background: #ffffff;
+            border-radius: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #e5e7eb;
+        }
+        .action-btn {
+            transition: all 0.2s ease;
+            border-radius: 9999px; /* Fully rounded like pills */
+        }
+        .action-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* Print Styles */
+        @media print {
+            body * { visibility: hidden; }
+            #print-area, #print-area * { visibility: visible; }
+            #print-area {
+                position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+                display: flex; flex-wrap: wrap; align-content: flex-start;
+                padding: 10mm; gap: 5mm; background: white;
+            }
+            .print-photo { border: 1px dashed #ccc; box-sizing: border-box; }
+        }
+
+        /* Checkered background for transparency preview */
+        .canvas-container {
+            background-image: 
+                linear-gradient(45deg, #f3f4f6 25%, transparent 25%), 
+                linear-gradient(-45deg, #f3f4f6 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #f3f4f6 75%), 
+                linear-gradient(-45deg, transparent 75%, #f3f4f6 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        /* Custom Range Slider */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 16px; width: 16px;
+            border-radius: 50%;
+            background: #111827;
+            cursor: pointer;
+            margin-top: -6px;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px;
+            cursor: pointer;
+            background: #e5e7eb;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="min-h-screen overflow-x-hidden relative">
+
+    <div class="pt-4 sticky top-0 z-50 px-4 sm:px-6 lg:px-8">
+        <nav class="max-w-7xl mx-auto bg-white/90 backdrop-blur-md h-16 flex items-center justify-between px-6 border border-gray-200 rounded-full shadow-sm">
+            <h1 class="text-xl font-semibold text-black tracking-tight">Passport Sizer</h1>
+            <button onclick="resetApp()" class="text-sm font-medium text-gray-500 hover:text-black transition">Reset All</button>
+        </nav>
+    </div>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <div id="upload-screen" class="flex flex-col items-center justify-center min-h-[60vh] gemini-card p-12 hover:border-gray-400 transition-colors cursor-pointer border-2 border-dashed" onclick="document.getElementById('file-input').click()" ondrop="handleDrop(event)" ondragover="allowDrop(event)">
+            <div class="w-20 h-20 mb-4 text-gray-800 bg-gray-100 rounded-full flex items-center justify-center">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+            </div>
+            <h2 class="text-2xl font-medium text-black mb-2">Upload photo</h2>
+            <p class="text-gray-500 mb-8 text-center max-w-sm">Drag and drop an image here, or click to browse files.</p>
+            
+            <input type="file" id="file-input" class="hidden" accept="image/png, image/jpeg, image/webp" onchange="handleFile(this.files[0])">
+            <button class="bg-black text-white px-8 py-3 font-medium action-btn hover:bg-gray-800">
+                Browse device
+            </button>
+        </div>
+
+        <div id="editor-screen" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-6">
+            
+            <div class="lg:col-span-4 space-y-6">
+                
+                <div class="gemini-card p-6">
+                    <h3 class="text-base font-medium mb-3 text-black">Dimensions</h3>
+                    <select id="size-select" class="w-full p-3 rounded-xl border border-gray-200 bg-gray-50 text-black outline-none focus:border-gray-400 focus:bg-white transition" onchange="updateSize()">
+                        <option value="35x45">Standard Passport (3.5 x 4.5 cm)</option>
+                        <option value="2x2">US Visa (2 x 2 inch)</option>
+                        <option value="custom">Custom ID Size</option>
+                    </select>
+                </div>
+
+                <div class="gemini-card p-6">
+                    <h3 class="text-base font-medium mb-4 text-black">Adjustments</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-sm font-medium text-gray-500 flex justify-between mb-1">Zoom <span id="zoom-val">100%</span></label>
+                            <input type="range" id="zoom-slider" min="10" max="300" value="100" class="w-full" oninput="updateZoom(this.value)">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-500 flex justify-between mb-1">Brightness <span id="bright-val">100%</span></label>
+                            <input type="range" id="bright-slider" min="50" max="150" value="100" class="w-full" oninput="updateBrightness(this.value)">
+                        </div>
+                        <div>
+                            <label class="text-sm font-medium text-gray-500 flex justify-between mb-1">Contrast <span id="contrast-val">100%</span></label>
+                            <input type="range" id="contrast-slider" min="50" max="150" value="100" class="w-full" oninput="updateContrast(this.value)">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="lg:col-span-8 space-y-6">
+                
+                <div class="gemini-card p-6 flex flex-col items-center justify-center relative overflow-hidden">
+                    <div class="w-full flex justify-between items-center mb-4">
+                        <h3 class="text-base font-medium text-black">Preview</h3>
+                    </div>
+                    
+                    <div class="canvas-container border border-gray-200 inline-block relative cursor-grab" id="canvas-wrapper">
+                        <canvas id="preview-canvas"></canvas>
+                    </div>
+                </div>
+
+                <div class="gemini-card p-6">
+                    <h3 class="text-base font-medium mb-4 text-black">Export A4 Sheet</h3>
+                    
+                    <div class="grid grid-cols-3 gap-3 mb-6">
+                        <label class="cursor-pointer border border-gray-200 p-3 rounded-xl flex flex-col items-center gap-1 hover:border-black hover:bg-gray-50 transition sheet-option bg-gray-50 border-black" onclick="selectLayout(this)">
+                            <input type="radio" name="sheet-layout" value="4" class="hidden" checked>
+                            <div class="text-lg font-semibold text-black">4</div>
+                            <div class="text-xs text-gray-500">Photos</div>
+                        </label>
+                        <label class="cursor-pointer border border-gray-200 p-3 rounded-xl flex flex-col items-center gap-1 hover:border-black hover:bg-gray-50 transition sheet-option" onclick="selectLayout(this)">
+                            <input type="radio" name="sheet-layout" value="8" class="hidden">
+                            <div class="text-lg font-semibold text-black">8</div>
+                            <div class="text-xs text-gray-500">Photos</div>
+                        </label>
+                        <label class="cursor-pointer border border-gray-200 p-3 rounded-xl flex flex-col items-center gap-1 hover:border-black hover:bg-gray-50 transition sheet-option" onclick="selectLayout(this)">
+                            <input type="radio" name="sheet-layout" value="16" class="hidden">
+                            <div class="text-lg font-semibold text-black">16</div>
+                            <div class="text-xs text-gray-500">Photos</div>
+                        </label>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="downloadSheet()" class="flex-1 py-3 px-4 bg-white border border-gray-300 text-black rounded-full font-medium hover:bg-gray-50 transition action-btn text-sm">
+                            Save Sheet
+                        </button>
+                        <button onclick="printSheet()" class="flex-1 py-3 px-4 bg-black text-white rounded-full font-medium hover:bg-gray-800 transition action-btn text-sm">
+                            Print A4
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <div id="print-area"></div>
+
+    <script>
+        // --- Core Variables ---
+        let originalImage = new Image();
+        const canvas = document.getElementById('preview-canvas');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+        let state = {
+            width: 413,   // 35x45mm roughly matches this ratio at 300dpi
+            height: 531,  
+            zoom: 1,
+            panX: 0,
+            panY: 0,
+            brightness: 100,
+            contrast: 100
+        };
+
+        // --- Drag & Drop logic ---
+        function allowDrop(e) {
+            e.preventDefault();
+            document.getElementById('upload-screen').classList.add('border-black', 'bg-gray-50');
+        }
+        function handleDrop(e) {
+            e.preventDefault();
+            document.getElementById('upload-screen').classList.remove('border-black', 'bg-gray-50');
+            if(e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+        }
+
+        function handleFile(file) {
+            if(!file || !file.type.startsWith('image/')) return alert('Please upload an image file.');
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                originalImage.onload = () => {
+                    document.getElementById('upload-screen').classList.add('hidden');
+                    document.getElementById('editor-screen').classList.remove('hidden');
+                    autoAlign();
+                };
+                originalImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // --- Editor Functions ---
+        function updateSize() {
+            const val = document.getElementById('size-select').value;
+            if (val === '35x45') { state.width = 413; state.height = 531; }
+            else if (val === '2x2') { state.width = 600; state.height = 600; }
+            else { state.width = 500; state.height = 600; }
+            autoAlign();
+        }
+
+        function autoAlign() {
+            canvas.width = state.width;
+            canvas.height = state.height;
+            const scaleX = canvas.width / originalImage.width;
+            const scaleY = canvas.height / originalImage.height;
+            state.zoom = Math.max(scaleX, scaleY);
+            state.panX = 0;
+            state.panY = 0;
+            
+            document.getElementById('zoom-slider').value = Math.round(state.zoom * 100);
+            document.getElementById('zoom-val').innerText = `${Math.round(state.zoom * 100)}%`;
+            drawCanvas();
+        }
+
+        function updateZoom(val) { state.zoom = val / 100; document.getElementById('zoom-val').innerText = `${val}%`; drawCanvas(); }
+        function updateBrightness(val) { state.brightness = val; document.getElementById('bright-val').innerText = `${val}%`; drawCanvas(); }
+        function updateContrast(val) { state.contrast = val; document.getElementById('contrast-val').innerText = `${val}%`; drawCanvas(); }
+
+        // --- Mouse Interaction on Canvas ---
+        let isDragging = false;
+        let startX, startY;
+        let lastPanX, lastPanY;
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            lastPanX = state.panX;
+            lastPanY = state.panY;
+            document.getElementById('canvas-wrapper').classList.replace('cursor-grab', 'cursor-grabbing');
+        });
+        
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+            document.getElementById('canvas-wrapper').classList.replace('cursor-grabbing', 'cursor-grab');
+        });
+        
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            state.panX = lastPanX + (e.clientX - startX);
+            state.panY = lastPanY + (e.clientY - startY);
+            drawCanvas();
+        });
+
+        // --- Render Logic ---
+        function drawCanvas() {
+            if(!originalImage.src) return;
+
+            canvas.width = state.width;
+            canvas.height = state.height;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw image onto the main canvas with Pan, Zoom & Filters
+            ctx.save();
+            ctx.filter = `brightness(${state.brightness}%) contrast(${state.contrast}%)`;
+            ctx.translate(canvas.width / 2 + state.panX, canvas.height / 2 + state.panY);
+            ctx.scale(state.zoom, state.zoom);
+            ctx.drawImage(originalImage, -originalImage.width / 2, -originalImage.height / 2);
+            ctx.restore();
+
+            drawGuides();
+        }
+
+        function drawGuides() {
+            ctx.save();
+            ctx.strokeStyle = 'rgba(0, 0, 0, 0.2)'; // Subtle dark guide
+            ctx.setLineDash([4, 4]);
+            ctx.lineWidth = 1;
+            
+            const headW = canvas.width * 0.6;
+            const headH = canvas.height * 0.7;
+            const headX = (canvas.width - headW) / 2;
+            const headY = canvas.height * 0.1;
+            
+            ctx.strokeRect(headX, headY, headW, headH);
+            
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        function getFinalImage() {
+            drawCanvas();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.save();
+            ctx.filter = `brightness(${state.brightness}%) contrast(${state.contrast}%)`;
+            ctx.translate(canvas.width / 2 + state.panX, canvas.height / 2 + state.panY);
+            ctx.scale(state.zoom, state.zoom);
+            ctx.drawImage(originalImage, -originalImage.width / 2, -originalImage.height / 2);
+            ctx.restore();
+            
+            const url = canvas.toDataURL('image/png');
+            drawCanvas(); // Restore guides
+            return url;
+        }
+
+        // --- UI & Export logic ---
+        function selectLayout(el) {
+            document.querySelectorAll('.sheet-option').forEach(opt => {
+                opt.classList.remove('bg-gray-50', 'border-black');
+                opt.classList.add('border-gray-200');
+            });
+            el.classList.add('bg-gray-50', 'border-black');
+            el.classList.remove('border-gray-200');
+            el.querySelector('input').checked = true;
+        }
+
+        function generateSheet() {
+            const count = parseInt(document.querySelector('input[name="sheet-layout"]:checked').value);
+            const sheet = document.createElement('canvas');
+            const sCtx = sheet.getContext('2d');
+            sheet.width = 2480; sheet.height = 3508; // A4 at 300 DPI
+            sCtx.fillStyle = '#ffffff';
+            sCtx.fillRect(0, 0, sheet.width, sheet.height);
+
+            const img = new Image();
+            return new Promise((resolve) => {
+                img.onload = () => {
+                    let cols = count >= 8 ? 4 : 2;
+                    let rows = Math.ceil(count / cols);
+                    let startX = 100, startY = 100, drawn = 0;
+
+                    for(let r=0; r<rows; r++) {
+                        for(let c=0; c<cols; c++) {
+                            if(drawn >= count) break;
+                            const x = startX + c * (state.width + 50);
+                            const y = startY + r * (state.height + 50);
+                            sCtx.strokeStyle = '#cccccc';
+                            sCtx.lineWidth = 2;
+                            sCtx.strokeRect(x-1, y-1, state.width+2, state.height+2);
+                            sCtx.drawImage(img, x, y, state.width, state.height);
+                            drawn++;
+                        }
+                    }
+                    resolve(sheet.toDataURL('image/png'));
+                };
+                img.src = getFinalImage();
+            });
+        }
+
+        async function downloadSheet() {
+            const link = document.createElement('a');
+            link.download = 'passport_sheet.png';
+            link.href = await generateSheet();
+            link.click();
+        }
+
+        function printSheet() {
+            const count = parseInt(document.querySelector('input[name="sheet-layout"]:checked').value);
+            const printArea = document.getElementById('print-area');
+            printArea.innerHTML = '';
+            const url = getFinalImage();
+            const w = state.width === 413 ? '35mm' : (state.width === 600 ? '50.8mm' : '40mm');
+            const h = state.height === 531 ? '45mm' : (state.height === 600 ? '50.8mm' : '50mm');
+
+            for(let i=0; i<count; i++) {
+                const img = document.createElement('img');
+                img.src = url;
+                img.className = 'print-photo';
+                img.style.width = w;
+                img.style.height = h;
+                printArea.appendChild(img);
+            }
+            window.print();
+        }
+
+        function resetApp() {
+            originalImage = new Image();
+            document.getElementById('editor-screen').classList.add('hidden');
+            document.getElementById('upload-screen').classList.remove('hidden');
+            state = { width: 413, height: 531, zoom: 1, panX: 0, panY: 0, brightness: 100, contrast: 100 };
+            document.getElementById('zoom-slider').value = 100;
+            document.getElementById('bright-slider').value = 100;
+            document.getElementById('contrast-slider').value = 100;
+            document.getElementById('size-select').value = '35x45';
+        }
+    </script>
+</body>
+</html>
