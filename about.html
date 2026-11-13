@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
+    <title>हमारे बारे में | About Us - AZAD HELPER</title>
+    <meta name="description" content="AZAD HELPER के बारे में जानें। Amrit Kumar Gupta द्वारा बनाई गई एक डिजिटल पहल, जिसका उद्देश्य सरकारी सेवाओं, ऑनलाइन टूल्स और डिजिटल सुविधाओं को एक ही जगह उपलब्ध कराना है।">
+    <meta name="keywords" content="AZAD HELPER, About Us, Amrit Kumar Gupta, Junior Web Developer, Digital Services, Online Tools">
+    <meta name="author" content="Amrit Kumar Gupta">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://azadhelper.online/about.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="About Us | AZAD HELPER">
+    <meta property="og:description" content="Meet the creator of AZAD HELPER and discover the purpose behind this digital platform.">
+    <meta property="og:url" content="https://azadhelper.online/about.html">
+    <meta property="og:site_name" content="AZAD HELPER">
+    <meta property="og:locale" content="hi_IN">
+
+    <meta name="theme-color" content="#EAF2FF">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+            background: #EAF2FF;
+            color: #1e293b;
+            line-height: 1.8;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 18px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .home-btn {
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 9px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 18px;
+        }
+
+        .about-card {
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 5px 25px rgba(37,99,235,0.07);
+        }
+
+        .page-heading {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 22px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .page-heading h1 {
+            font-size: 28px;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+
+        .page-heading p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .hero {
+            background: #EAF2FF;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hero h2 {
+            color: #1e40af;
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #475569;
+            font-size: 14px;
+        }
+
+        .profile {
+            text-align: center;
+            padding: 25px 15px;
+            border: 1px solid #dbeafe;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            background: #ffffff;
+        }
+
+        /* Creator Profile Photo */
+        .profile-icon {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            margin: 0 auto 15px;
+            border: 4px solid #dbeafe;
+            box-shadow: 0 4px 15px rgba(37,99,235,0.15);
+            background: #EAF2FF;
+        }
+
+        .profile h2 {
+            color: #1e40af;
+            font-size: 21px;
+        }
+
+        .profile .role {
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .profile p {
+            color: #64748b;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section h2 {
+            font-size: 19px;
+            color: #1e40af;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            font-size: 15px;
+            color: #475569;
+            margin-bottom: 9px;
+        }
+
+        .section ul {
+            padding-left: 23px;
+            margin: 10px 0;
+            color: #475569;
+            font-size: 15px;
+        }
+
+        .section li {
+            margin-bottom: 8px;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0 !important;
+        }
+
+        .service-list li {
+            background: #f8faff;
+            border: 1px solid #e2e8f0;
+            padding: 11px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .section a {
+            color: #2563eb;
+            text-decoration: none;
+            overflow-wrap: anywhere;
+        }
+
+        .section a:hover {
+            text-decoration: underline;
+        }
+
+        .language-divider {
+            margin: 40px 0;
+            border: none;
+            border-top: 2px solid #dbeafe;
+        }
+
+        .english {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .english .section p,
+        .english .section ul {
+            font-size: 14px;
+        }
+
+        .thank-you {
+            background: #EAF2FF;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .thank-you h2 {
+            color: #2563eb;
+            font-size: 27px;
+            margin-bottom: 8px;
+        }
+
+        .thank-you p {
+            color: #475569;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .thank-you strong {
+            color: #1e40af;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px 15px;
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .footer strong {
+            color: #2563eb;
+            font-size: 16px;
+        }
+
+        .footer a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 15px 18px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .container {
+                margin: 22px auto;
+                padding: 0 12px;
+            }
+
+            .about-card {
+                padding: 22px 18px;
+                border-radius: 12px;
+            }
+
+            .page-heading h1 {
+                font-size: 23px;
+            }
+
+            .hero h2 {
+                font-size: 22px;
+            }
+
+            .section h2 {
+                font-size: 17px;
+            }
+
+            .section p,
+            .section ul {
+                font-size: 14px;
+            }
+
+            .profile-icon {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">AZAD HELPER</a>
+        <a href="index.html" class="home-btn">होम पेज</a>
+    </header>
+
+    <main class="container">
+        <article class="about-card">
+
+            <div class="page-heading">
+                <h1>हमारे बारे में</h1>
+                <p>About Us – AZAD HELPER</p>
+            </div>
+
+            <!-- ================= HINDI VERSION ================= -->
+
+            <div class="hindi">
+
+                <div class="hero">
+                    <h2>AZAD HELPER</h2>
+                    <p><strong>आपकी डिजिटल सेवाएँ, अब और भी आसान।</strong></p>
+                    <p>
+                        सभी जरूरी डिजिटल सुविधाएँ और उपयोगी सेवाएँ एक ही जगह।
+                    </p>
+                </div>
+
+                <!-- Creator Profile -->
+                <div class="profile">
+                    <img
+                        src="https://i.ibb.co/TBrSbxmf/In-Shot-20261031-183054556.jpg"
+                        alt="Amrit Kumar Gupta - Junior Web Developer"
+                        class="profile-icon"
+                        loading="lazy"
+                    >
+
+                    <h2>Amrit Kumar Gupta</h2>
+                    <p class="role">Junior Web Developer</p>
+                    <p>
+                        टेक्नोलॉजी और वेब डेवलपमेंट में रुचि रखने वाला एक युवा डेवलपर, जिसका उद्देश्य डिजिटल सुविधाओं को आम लोगों के लिए आसान बनाना है।
+                    </p>
+                </div>
+
+                <section class="section">
+                    <h2>1. हमारे बारे में</h2>
+                    <p>
+                        नमस्कार! मेरा नाम Amrit Kumar Gupta है और मैं एक Junior Web Developer हूँ। मुझे वेबसाइट बनाने, नई टेक्नोलॉजी सीखने और डिजिटल दुनिया में नए-नए विचारों पर काम करने में रुचि है।
+                    </p>
+                    <p>
+                        AZAD HELPER मेरी एक छोटी-सी डिजिटल पहल है। इसे बनाने का उद्देश्य लोगों की रोजमर्रा की डिजिटल जरूरतों को आसान बनाना और उपयोगी ऑनलाइन सेवाओं को एक ही प्लेटफॉर्म पर उपलब्ध कराना है।
+                    </p>
+                    <p>
+                        मैं लगातार नई चीजें सीखने और इस प्लेटफॉर्म को बेहतर बनाने का प्रयास कर रहा हूँ।
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h2>2. AZAD HELPER बनाने का उद्देश्य</h2>
+                    <p>
+                        आज के समय में बहुत-सी डिजिटल सेवाओं के लिए लोगों को अलग-अलग वेबसाइटों पर जाना पड़ता है। कई बार सही वेबसाइट या उपयोगी ऑनलाइन टूल खोजना भी मुश्किल हो जाता है।
+                    </p>
+                    <p>
+                        इसी समस्या को ध्यान में रखते हुए AZAD HELPER बनाया गया है, ताकि लोगों को जरूरी डिजिटल सेवाओं और उपयोगी वेबसाइटों के लिंक एक ही जगह मिल सकें।
+                    </p>
+                    <p>
+                        हमारा प्रयास है कि डिजिटल सुविधाओं तक पहुँचना सरल, सुविधाजनक और समय बचाने वाला हो।
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h2>3. AZAD HELPER पर क्या मिलेगा?</h2>
+                    <p>
+                        AZAD HELPER पर आपको कई प्रकार की उपयोगी डिजिटल सुविधाएँ मिलेंगी, जैसे:
+                    </p>
+                    <ul class="service-list">
+                        <li><strong>सरकारी सेवाएँ:</strong> आधार, PAN कार्ड, वोटर आईडी, सरकारी योजनाओं और प्रमाण पत्रों के आधिकारिक लिंक।</li>
+                        <li><strong>Document Maker:</strong> Resume, Biodata और अन्य दस्तावेज बनाने की सुविधाएँ।</li>
+                        <li><strong>Online Tools:</strong> PDF Tools, Image Tools और अन्य उपयोगी डिजिटल टूल्स।</li>
+                        <li><strong>Education:</strong> पढ़ाई और शिक्षा से संबंधित उपयोगी जानकारी और सुविधाएँ।</li>
+                    </ul>
+                    <p>
+                        हमारा लक्ष्य इन सुविधाओं को एक व्यवस्थित और उपयोगकर्ता-अनुकूल प्लेटफॉर्म पर उपलब्ध कराना है।
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h2>4. हमारा मिशन</h2>
+                    <p>
+                        हमारा मिशन डिजिटल सेवाओं को सरल और अधिक लोगों के लिए सुलभ बनाना है।
+                    </p>
+                    <p>
+                        हम चाहते हैं कि हर व्यक्ति आसानी से उपयोगी ऑनलाइन सेवाओं तक पहुँच सके और अपनी जरूरत के डिजिटल काम कम समय में कर सके।
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h2>5. भविष्य की योजनाएँ</h2>
+                    <p>
+                        AZAD HELPER एक निरंतर विकसित होने वाला प्लेटफॉर्म है। भविष्य में हमारा प्रयास रहेगा कि:
+                    </p>
+                    <ul>
+                        <li>नई और उपयोगी ऑनलाइन सुविधाएँ जोड़ी जाएँ।</li>
+                        <li>दस्तावेज और PDF से जुड़े टूल्स को बेहतर बनाया जाए।</li>
+                        <li>सरकारी सेवाओं के उपयोगी आधिकारिक लिंक उपलब्ध कराए जाएँ।</li>
+                        <li>शिक्षा से संबंधित सुविधाओं और जानकारी का विस्तार किया जाए।</li>
+                        <li>उपयोगकर्ताओं के सुझावों के आधार पर वेबसाइट में सुधार किया जाए।</li>
+                    </ul>
+                </section>
+
+                <section class="section">
+                    <h2>6. आपकी राय हमारे लिए महत्वपूर्ण है</h2>
+                    <p>
+                        AZAD HELPER को बेहतर बनाने में आपके सुझाव और अनुभव महत्वपूर्ण हैं। यदि आपको वेबसाइट में कोई समस्या दिखाई देती है या आपके पास कोई नया सुझाव है, तो हमें जरूर बताएँ।
+                    </p>
+                    <p>
+                        आपका सहयोग हमें इस प्लेटफॉर्म को और बेहतर बनाने के लिए प्रेरित करता है।
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h2>7. हमसे संपर्क करें</h2>
+                    <p>
+                        AZAD HELPER से संबंधित किसी भी सवाल, सुझाव या प्रतिक्रिया के लिए आप हमसे ईमेल के माध्यम से संपर्क कर सकते हैं।
+                    </p>
+                    <p>
+                        <strong>ईमेल:</strong>
+                        <a href="mailto:amriticon62@gmail.com">
+                            amriticon62@gmail.com
+                        </a>
+                    </p>
+                    <p>
+                        <strong>वेबसाइट:</strong>
+                        <a href="https://azadhelper.online/">
+                            https://azadhelper.online/
+                        </a>
+                    </p>
+                </section>
+
+                <div class="thank-you">
+                    <h2>धन्यवाद!</h2>
+                    <p>
+                        AZAD HELPER पर आने और हमारी इस छोटी-सी डिजिटल पहल का हिस्सा बनने के लिए आपका बहुत-बहुत धन्यवाद।
+                    </p>
+                    <p>
+                        हमें उम्मीद है कि यह प्लेटफॉर्म आपके डिजिटल कामों को आसान बनाने में मदद करेगा।
+                    </p>
+                    <p><strong>सादर,</strong></p>
+                    <p><strong>Amrit Kumar Gupta</strong></p>
+                    <p>Junior Web Developer</p>
+                    <p><strong>AZAD HELPER</strong></p>
+                    <p><em>आपकी डिजिटल सेवाएँ, अब और भी आसान।</em></p>
+                </div>
+
+            </div>
+
+            <hr class="language-divider">
+
+            <!-- ================= ENGLISH VERSION ================= -->
+
+            <div class="english">
+
+                <div class="page-heading">
+                    <h1>About Us</h1>
+                    <p>Discover the Story Behind AZAD HELPER</p>
+                </div>
+
+                <div class="hero">
+                    <h2>AZAD HELPER</h2>
+                    <p><strong>Your Digital Services, Now Made Easier.</strong></p>
+                    <p>
+                        Useful digital services and online facilities, all in one place.
+                    </p>
+                </div>
+
+                <!-- Creator Profile -->
+                <div class="profile">
+                    <img
+                        src="https://i.ibb.co/TBrSbxmf/In-Shot-20261031-183054556.jpg"
+                        alt="Amrit Kumar Gupta - Junior Web Developer"
+                        class="profile-icon"
+                        loading="lazy"
+                    >
+
+                    <h2>Amrit Kumar Gupta</h2>
+                    <p class="role">Junior Web Developer</p>
+                    <p>
+                        A young developer interested in technology and web development, with a vision to make digital services easier for everyone.
+                    </p>
+                </div>
+
+                <section class="section">
+                    <h2>1. Who We Are</h2>
+                    <p>
+                        Hello! My name is Amrit Kumar Gupta, and I am a Junior Web Developer. I am interested in building websites, learning new technologies, and exploring creative ideas in the digital world.
+                    </p>
+                    <p>
+                        AZAD HELPER is my small digital initiative. I created this platform with the aim of making everyday digital tasks easier and bringing useful online services together in one place.
+                    </p>
+                    <p>
+                        I am continuously learning new things and working to improve this platform.
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h2>2. Why I Created AZAD HELPER</h2>
+                    <p>
+                        Today, people often need to visit different websites to access various digital services. Sometimes, finding the correct official website or a useful online tool can also be difficult.
+                    </p>
+                    <p>
+                        Keeping this problem in mind, I created AZAD HELPER to bring useful digital services and website links together on a single platform.
+                    </p>
+                    <p>
+                        Our aim is to make digital facilities easier to access, more convenient to use, and time-saving for everyone.
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h2>3. What You Will Find on AZAD HELPER</h2>
+                    <p>
+                        AZAD HELPER provides access to different types of useful digital facilities, including:
+                    </p>
+                    <ul class="service-list">
+                        <li><strong>Government Services:</strong> Official links for Aadhaar, PAN Card, Voter ID, government schemes, and certificates.</li>
+                        <li><strong>Document Maker:</strong> Facilities for creating resumes, biodata, and other documents.</li>
+                        <li><strong>Online Tools:</strong> PDF Tools, Image Tools, and other useful digital tools.</li>
+                        <li><strong>Education:</strong> Useful information and facilities related to learning and education.</li>
+                    </ul>
+                    <p>
+                        Our goal is to make these facilities available through an organized and user-friendly platform.
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h2>4. Our Mission</h2>
+                    <p>
+                        Our mission is to make digital services simpler and more accessible to everyone.
+                    </p>
+                    <p>
+                        We want people to access useful online services easily and complete their everyday digital tasks with less effort and time.
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h2>5. Our Future Vision</h2>
+                    <p>
+                        AZAD HELPER is a platform that will continue to grow and improve. Our future goals include:
+                    </p>
+                    <ul>
+                        <li>Adding new and useful online facilities.</li>
+                        <li>Improving document and PDF-related tools.</li>
+                        <li>Providing useful official links to government services.</li>
+                        <li>Expanding educational information and facilities.</li>
+                        <li>Improving the website based on user feedback and suggestions.</li>
+                    </ul>
+                </section>
+
+                <section class="section">
+                    <h2>6. Your Feedback Matters</h2>
+                    <p>
+                        Your suggestions and experiences are important in helping us improve AZAD HELPER.
+                    </p>
+                    <p>
+                        If you find any issue on the website or have a new idea, feel free to share it with us. Your support encourages us to make this platform better.
+                    </p>
+                </section>
+
+                <section class="section">
+                    <h2>7. Contact Us</h2>
+                    <p>
+                        If you have any questions, suggestions, or feedback related to AZAD HELPER, you can contact us through email.
+                    </p>
+                    <p>
+                        <strong>Email:</strong>
+                        <a href="mailto:amriticon62@gmail.com">
+                            amriticon62@gmail.com
+                        </a>
+                    </p>
+                    <p>
+                        <strong>Website:</strong>
+                        <a href="https://azadhelper.online/">
+                            https://azadhelper.online/
+                        </a>
+                    </p>
+                </section>
+
+                <div class="thank-you">
+                    <h2>Thank You!</h2>
+                    <p>
+                        Thank you for visiting AZAD HELPER and becoming a part of this small digital initiative.
+                    </p>
+                    <p>
+                        We hope this platform helps make your everyday digital tasks easier and more convenient.
+                    </p>
+                    <p><strong>With Regards,</strong></p>
+                    <p><strong>Amrit Kumar Gupta</strong></p>
+                    <p>Junior Web Developer</p>
+                    <p><strong>AZAD HELPER</strong></p>
+                    <p><em>Your Digital Services, Now Made Easier.</em></p>
+                </div>
+
+            </div>
+
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <strong>AZAD HELPER</strong>
+        <p>Your Digital Services, Now Made Easier.</p>
+        <p>© 2026 AZAD HELPER. All Rights Reserved.</p>
+        <p>
+            <a href="index.html">Home</a>
+            &nbsp; | &nbsp;
+            <a href="about.html">About Us</a>
+            &nbsp; | &nbsp;
+            <a href="privacy.html">Privacy Policy</a>
+        </p>
+    </footer>
+
+</body>
+</html>
