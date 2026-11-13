@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Signature Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom Scrollbar for a cleaner look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #ffffff; }
+        ::-webkit-scrollbar-thumb { background: #000000; border-radius: 10px; }
+        
+        /* Elastic transitions */
+        .elastic {
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        /* Range Slider Styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #000;
+            cursor: pointer;
+            margin-top: -8px;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 1px #000;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #e5e7eb;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="bg-[#f9fafb] text-black font-sans min-h-screen selection:bg-black selection:text-white p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto space-y-8">
+        
+        <!-- Header -->
+        <header class="text-center space-y-3 pt-4">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Signature Tool</h1>
+            <p class="text-black/60 font-medium">Crop, Resize, and Clean your signature instantly.</p>
+        </header>
+
+        <!-- Upload Section -->
+        <div id="uploadSection" class="bg-white border-2 border-dashed border-gray-300 hover:border-black rounded-[2rem] p-12 text-center cursor-pointer transition-all duration-300 elastic group relative overflow-hidden flex flex-col items-center justify-center min-h-[350px] shadow-sm hover:shadow-md mx-auto max-w-4xl">
+            <input type="file" id="fileInput" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*">
+            
+            <!-- Better Icon -->
+            <div class="bg-gray-50 p-6 rounded-full group-hover:bg-gray-100 transition-colors duration-300 mb-6">
+                <svg class="w-16 h-16 text-black/70 group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                </svg>
+            </div>
+            
+            <h2 class="text-2xl font-bold mb-2">Upload your signature</h2>
+            <p class="text-sm text-gray-500 font-medium">Drag & drop your image here, or click to browse</p>
+        </div>
+
+        <!-- Editor Section (Hidden by default) -->
+        <div id="editorSection" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Column: Previews -->
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Preview Canvas Area -->
+                <div class="bg-white border border-gray-200 rounded-[2rem] p-8 flex flex-col items-center justify-center min-h-[450px] relative shadow-sm">
+                    <div class="absolute top-6 left-6 flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Live Preview</span>
+                    </div>
+                    
+                    <div class="w-full flex-1 flex items-center justify-center p-4">
+                        <canvas id="canvas" class="max-w-full max-h-[300px] object-contain border border-gray-100 rounded-xl shadow-sm bg-white"></canvas>
+                    </div>
+
+                    <div class="mt-4 flex gap-6 text-sm font-semibold text-gray-600 bg-gray-50 px-6 py-3 rounded-full border border-gray-200">
+                        <span id="imgSize" class="flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                            0 KB
+                        </span>
+                        <span class="w-px h-4 bg-gray-300"></span>
+                        <span id="imgDim" class="flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                            0 x 0
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Original Thumbnail for comparison -->
+                <div class="bg-white border border-gray-200 rounded-[1.5rem] p-5 flex items-center gap-6 shadow-sm">
+                    <div class="text-xs font-bold uppercase text-gray-400 tracking-wider">Original</div>
+                    <img id="originalPreview" class="h-16 w-auto object-contain rounded-lg border border-gray-100" src="" alt="Original">
+                </div>
+            </div>
+
+            <!-- Right Column: Controls -->
+            <div class="lg:col-span-5 space-y-6">
+                <div class="bg-white border border-gray-200 rounded-[2rem] p-6 sm:p-8 space-y-8 shadow-sm">
+                    
+                    <!-- Smart Tools -->
+                    <div class="space-y-4">
+                        <h3 class="font-bold text-lg text-gray-800 flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            Smart Action
+                        </h3>
+                        <button id="btnAutoCrop" class="w-full bg-gray-50 border-2 border-gray-200 rounded-2xl py-4 px-4 hover:border-black hover:bg-black hover:text-white transition-all font-semibold text-base elastic flex justify-center items-center gap-2">
+                            Auto Crop Signature
+                        </button>
+                    </div>
+
+                    <!-- Adjustments -->
+                    <div class="space-y-5">
+                        <h3 class="font-bold text-lg text-gray-800">Adjustments</h3>
+                        <div class="space-y-3 bg-gray-50 p-5 rounded-2xl border border-gray-100">
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm font-medium"><label>Brightness</label><span id="valBright">100%</span></div>
+                                <input type="range" id="brightness" min="0" max="200" value="100">
+                            </div>
+                            <div class="space-y-2 mt-4">
+                                <div class="flex justify-between text-sm font-medium"><label>Contrast</label><span id="valContrast">100%</span></div>
+                                <input type="range" id="contrast" min="0" max="200" value="100">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resizing -->
+                    <div class="space-y-5">
+                        <h3 class="font-bold text-lg text-gray-800">Resize Options</h3>
+                        
+                        <div class="space-y-3">
+                            <label class="text-sm font-bold text-gray-500 uppercase tracking-wide">By Dimensions (Pixels)</label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button class="dim-btn border-2 border-gray-200 rounded-xl py-3 text-sm font-semibold hover:border-black hover:bg-black hover:text-white transition-all" data-w="140" data-h="60">140 x 60</button>
+                                <button class="dim-btn border-2 border-gray-200 rounded-xl py-3 text-sm font-semibold hover:border-black hover:bg-black hover:text-white transition-all" data-w="200" data-h="80">200 x 80</button>
+                                <div class="col-span-2 flex border-2 border-gray-200 rounded-xl overflow-hidden focus-within:border-black transition-colors">
+                                    <input type="number" id="customW" placeholder="Width" class="w-1/2 px-4 py-3 outline-none text-center border-r-2 border-gray-200 font-medium bg-transparent">
+                                    <input type="number" id="customH" placeholder="Height" class="w-1/2 px-4 py-3 outline-none text-center font-medium bg-transparent">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 pt-2">
+                            <label class="text-sm font-bold text-gray-500 uppercase tracking-wide">Auto Compress (File Size)</label>
+                            <div class="grid grid-cols-4 gap-2">
+                                <button class="kb-btn border-2 border-gray-200 rounded-xl py-2 text-sm font-semibold hover:border-black hover:bg-black hover:text-white transition-all" data-kb="10">10KB</button>
+                                <button class="kb-btn border-2 border-gray-200 rounded-xl py-2 text-sm font-semibold hover:border-black hover:bg-black hover:text-white transition-all" data-kb="20">20KB</button>
+                                <button class="kb-btn border-2 border-gray-200 rounded-xl py-2 text-sm font-semibold hover:border-black hover:bg-black hover:text-white transition-all" data-kb="50">50KB</button>
+                                <button class="kb-btn border-2 border-gray-200 rounded-xl py-2 text-sm font-semibold hover:border-black hover:bg-black hover:text-white transition-all" data-kb="100">100KB</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="grid grid-cols-2 gap-4">
+                    <button id="btnDownloadJPG" class="col-span-2 bg-black text-white rounded-2xl py-4 font-bold text-lg border-2 border-black hover:bg-transparent hover:text-black transition-all elastic shadow-md hover:shadow-none">
+                        Download JPG
+                    </button>
+                    <button id="btnDownload" class="bg-white text-black border-2 border-gray-300 rounded-2xl py-3 font-semibold hover:border-black hover:bg-gray-50 transition-all elastic">
+                        Download PNG
+                    </button>
+                    <button id="btnPrint" class="bg-white text-black border-2 border-gray-300 rounded-2xl py-3 font-semibold hover:border-black hover:bg-gray-50 transition-all elastic flex items-center justify-center gap-2">
+                        Print A4
+                    </button>
+                    <button id="btnReset" class="col-span-2 text-sm font-semibold text-gray-400 hover:text-black transition-colors underline underline-offset-4 mt-2">
+                        Start Over
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden canvas for original image data -->
+    <canvas id="originalCanvas" class="hidden"></canvas>
+
+    <script>
+        // --- State Management ---
+        const state = {
+            originalImg: null,
+            brightness: 100,
+            contrast: 100,
+            targetW: null,
+            targetH: null,
+            targetKB: null,
+            cropRect: null,
+            currentQuality: 1.0
+        };
+
+        // --- DOM Elements ---
+        const fileInput = document.getElementById('fileInput');
+        const dropzone = document.getElementById('uploadSection');
+        const editor = document.getElementById('editorSection');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        const originalCanvas = document.getElementById('originalCanvas');
+        const originalCtx = originalCanvas.getContext('2d', { willReadFrequently: true });
+        
+        const uiSize = document.getElementById('imgSize');
+        const uiDim = document.getElementById('imgDim');
+        const originalPreview = document.getElementById('originalPreview');
+
+        // --- Event Listeners ---
+        
+        // Upload Handlers
+        fileInput.addEventListener('change', handleUpload);
+        dropzone.addEventListener('dragover', (e) => { 
+            e.preventDefault(); 
+            dropzone.classList.add('border-black', 'bg-gray-50'); 
+        });
+        dropzone.addEventListener('dragleave', () => {
+            dropzone.classList.remove('border-black', 'bg-gray-50');
+        });
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('border-black', 'bg-gray-50');
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                fileInput.files = e.dataTransfer.files;
+                handleUpload({ target: fileInput });
+            }
+        });
+
+        // Smart Tools
+        document.getElementById('btnAutoCrop').addEventListener('click', performAutoCrop);
+
+        // Adjustments
+        document.getElementById('brightness').addEventListener('input', (e) => {
+            state.brightness = e.target.value;
+            document.getElementById('valBright').innerText = e.target.value + '%';
+            render();
+        });
+        document.getElementById('contrast').addEventListener('input', (e) => {
+            state.contrast = e.target.value;
+            document.getElementById('valContrast').innerText = e.target.value + '%';
+            render();
+        });
+
+        // Resizing
+        document.querySelectorAll('.dim-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                state.targetW = parseInt(e.target.dataset.w);
+                state.targetH = parseInt(e.target.dataset.h);
+                // Highlight active button
+                document.querySelectorAll('.dim-btn').forEach(b => b.classList.remove('border-black', 'bg-black', 'text-white'));
+                e.target.classList.add('border-black', 'bg-black', 'text-white');
+                render();
+            });
+        });
+
+        document.getElementById('customW').addEventListener('input', handleCustomDim);
+        document.getElementById('customH').addEventListener('input', handleCustomDim);
+
+        function handleCustomDim() {
+            const w = document.getElementById('customW').value;
+            const h = document.getElementById('customH').value;
+            if(w && h) {
+                state.targetW = parseInt(w);
+                state.targetH = parseInt(h);
+                // Remove highlight from preset buttons
+                document.querySelectorAll('.dim-btn').forEach(b => b.classList.remove('border-black', 'bg-black', 'text-white'));
+                render();
+            }
+        }
+
+        // KB Targeting
+        document.querySelectorAll('.kb-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                state.targetKB = parseInt(e.target.dataset.kb);
+                // Highlight active KB button
+                document.querySelectorAll('.kb-btn').forEach(b => b.classList.remove('border-black', 'bg-black', 'text-white'));
+                e.target.classList.add('border-black', 'bg-black', 'text-white');
+                
+                await render();
+            });
+        });
+
+        // Actions
+        document.getElementById('btnReset').addEventListener('click', () => location.reload());
+        document.getElementById('btnDownload').addEventListener('click', () => downloadImage('png'));
+        document.getElementById('btnDownloadJPG').addEventListener('click', () => downloadImage('jpeg'));
+        document.getElementById('btnPrint').addEventListener('click', printA4);
+
+
+        // --- Core Functions ---
+
+        function handleUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                    // Initialize state
+                    state.originalImg = img;
+                    state.cropRect = { x: 0, y: 0, w: img.width, h: img.height };
+                    state.targetW = img.width;
+                    state.targetH = img.height;
+                    
+                    // Setup original canvas
+                    originalCanvas.width = img.width;
+                    originalCanvas.height = img.height;
+                    
+                    // Fill white background on original to prevent transparent issues when cropping
+                    originalCtx.fillStyle = '#FFFFFF';
+                    originalCtx.fillRect(0, 0, img.width, img.height);
+                    originalCtx.drawImage(img, 0, 0);
+                    
+                    originalPreview.src = event.target.result;
+                    
+                    dropzone.classList.add('hidden');
+                    editor.classList.remove('hidden');
+                    
+                    render();
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function render() {
+            if (!state.originalImg) return;
+
+            // 1. Create a working canvas
+            const workCanvas = document.createElement('canvas');
+            const workCtx = workCanvas.getContext('2d');
+            
+            // Set working dimensions
+            workCanvas.width = state.targetW;
+            workCanvas.height = state.targetH;
+
+            // Always draw solid white background for simple signatures
+            workCtx.fillStyle = '#FFFFFF';
+            workCtx.fillRect(0, 0, workCanvas.width, workCanvas.height);
+
+            // Apply Filters (Brightness & Contrast)
+            workCtx.filter = `brightness(${state.brightness}%) contrast(${state.contrast}%)`;
+            
+            // Draw cropped image onto working canvas (scaling to fit target dims)
+            workCtx.drawImage(
+                state.originalImg,
+                state.cropRect.x, state.cropRect.y, state.cropRect.w, state.cropRect.h,
+                0, 0, workCanvas.width, workCanvas.height
+            );
+
+            // Reset filter
+            workCtx.filter = 'none';
+
+            // Output to Main Canvas
+            canvas.width = workCanvas.width;
+            canvas.height = workCanvas.height;
+            
+            // Handle KB compression targeting
+            let finalDataUrl;
+            if (state.targetKB) {
+                finalDataUrl = await compressToTargetKB(workCanvas, state.targetKB);
+                const compressedImg = new Image();
+                compressedImg.onload = () => {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(compressedImg, 0, 0);
+                    updateUIStats(finalDataUrl, canvas.width, canvas.height);
+                };
+                compressedImg.src = finalDataUrl;
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(workCanvas, 0, 0);
+                finalDataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                updateUIStats(finalDataUrl, canvas.width, canvas.height);
+            }
+        }
+
+        function performAutoCrop() {
+            const w = originalCanvas.width;
+            const h = originalCanvas.height;
+            const imgData = originalCtx.getImageData(0, 0, w, h);
+            const data = imgData.data;
+
+            let minX = w, minY = h, maxX = 0, maxY = 0;
+            let found = false;
+
+            for (let y = 0; y < h; y++) {
+                for (let x = 0; x < w; x++) {
+                    const i = (y * w + x) * 4;
+                    const r = data[i], g = data[i+1], b = data[i+2];
+                    
+                    // Simple threshold: if pixel is dark enough (not white/light gray)
+                    if (r < 230 || g < 230 || b < 230) {
+                        if (x < minX) minX = x;
+                        if (y < minY) minY = y;
+                        if (x > maxX) maxX = x;
+                        if (y > maxY) maxY = y;
+                        found = true;
+                    }
+                }
+            }
+
+            if (found) {
+                // Add slight padding
+                const padding = 15;
+                minX = Math.max(0, minX - padding);
+                minY = Math.max(0, minY - padding);
+                maxX = Math.min(w, maxX + padding);
+                maxY = Math.min(h, maxY + padding);
+
+                state.cropRect = {
+                    x: minX,
+                    y: minY,
+                    w: maxX - minX,
+                    h: maxY - minY
+                };
+                
+                // Update target dims to maintain aspect ratio
+                state.targetW = state.cropRect.w;
+                state.targetH = state.cropRect.h;
+                
+                // Clear custom inputs to reflect aspect ratio change
+                document.getElementById('customW').value = '';
+                document.getElementById('customH').value = '';
+                document.querySelectorAll('.dim-btn').forEach(b => b.classList.remove('border-black', 'bg-black', 'text-white'));
+
+                render();
+            } else {
+                alert("Could not detect signature. Make sure the image has high contrast.");
+            }
+        }
+
+        async function compressToTargetKB(cvs, targetKB) {
+            let minQ = 0.0;
+            let maxQ = 1.0;
+            let quality = 0.8;
+            let bestUrl = cvs.toDataURL('image/jpeg', quality);
+            
+            // Binary search for best quality matching KB
+            for (let i = 0; i < 8; i++) {
+                const url = cvs.toDataURL('image/jpeg', quality);
+                const sizeKB = getBase64SizeKB(url);
+                
+                if (sizeKB <= targetKB) {
+                    bestUrl = url;
+                    minQ = quality; // try to increase quality
+                } else {
+                    maxQ = quality; // need lower quality
+                }
+                quality = (minQ + maxQ) / 2;
+            }
+            state.currentQuality = quality;
+            return bestUrl;
+        }
+
+        function getBase64SizeKB(base64Str) {
+            const len = base64Str.length - 'data:image/jpeg;base64,'.length;
+            return Math.round((len * 0.75) / 1024);
+        }
+
+        function updateUIStats(dataUrl, w, h) {
+            document.getElementById('imgSize').innerHTML = `
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                ~${getBase64SizeKB(dataUrl)} KB
+            `;
+            document.getElementById('imgDim').innerHTML = `
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                ${w} x ${h}
+            `;
+        }
+
+        function downloadImage(format) {
+            if (!state.originalImg) return;
+            const link = document.createElement('a');
+            link.download = `signature_edited.${format}`;
+            
+            // If target KB is active and format is JPG, use calculated quality
+            if (format === 'jpeg' && state.targetKB) {
+                link.href = canvas.toDataURL('image/jpeg', state.currentQuality);
+            } else {
+                link.href = canvas.toDataURL(`image/${format}`, 1.0);
+            }
+            
+            link.click();
+        }
+
+        function printA4() {
+            if (!state.originalImg) return;
+            const dataUrl = canvas.toDataURL('image/jpeg', 1.0);
+            
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Print Signatures</title>
+                    <style>
+                        body { margin: 0; padding: 20px; font-family: sans-serif; background: white; }
+                        @page { size: A4; margin: 10mm; }
+                        .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+                        .sig-box { border: 1px dashed #ccc; padding: 15px; text-align: center; border-radius: 8px; }
+                        img { max-width: 100%; height: auto; object-fit: contain; }
+                        .no-print { text-align: center; margin-bottom: 30px; padding: 20px; background: #f9fafb; border-radius: 12px; }
+                        @media print { .no-print { display: none; } .sig-box { border: none; padding: 0; } }
+                        button { padding: 12px 24px; background: black; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; }
+                    </style>
+                </head>
+                <body>
+                    <div class="no-print">
+                        <button onclick="window.print()">Print Document</button>
+                        <p style="color: #666; margin-top: 10px;">A4 Print Preview (24 Copies generated for convenience)</p>
+                    </div>
+                    <div class="grid">
+                        ${Array(24).fill(`<div class="sig-box"><img src="${dataUrl}"></div>`).join('')}
+                    </div>
+                </body>
+                </html>
+            `);
+            printWindow.document.close();
+        }
+
+    </script>
+</body>
+</html>
