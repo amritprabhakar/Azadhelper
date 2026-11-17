@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,25 +16,25 @@
     <meta name="language" content="English">
     <link rel="canonical" href="https://azadhelper.online/">
 
-    <!-- Favicon (Shows Logo in Google Search Front) -->
-    <link rel="icon" type="image/png" href="https://ibb.co/hRmxN7dr">
-    <link rel="apple-touch-icon" href="https://ibb.co/hRmxN7dr">
+    <!-- Favicon (Using Official Black PNG Logo) -->
+    <link rel="icon" type="image/png" href="https://i.ibb.co/1GzcX8K0/In-Shot-20261117-163953560.png">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/1GzcX8K0/In-Shot-20261117-163953560.png">
 
-    <!-- Open Graph / Facebook / WhatsApp (For Viral Sharing) -->
+    <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://azadhelper.online/">
     <meta property="og:title" content="AZAD HELPER | Sarkari Kaam, Documents aur Padhai sab ek jagah!">
     <meta property="og:description" content="Aadhaar, PAN, Ration Card, online Resume/Biodata maker, PDF tools aur Sarkari Result ke sabhi official links. Apna har online kaam banayein aasan!">
-    <meta property="og:image" content="https://ibb.co/hRmxN7dr">
+    <meta property="og:image" content="https://i.ibb.co/1GzcX8K0/In-Shot-20261117-163953560.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://azadhelper.online/">
     <meta property="twitter:title" content="AZAD HELPER | All Digital Services & Government Forms">
     <meta property="twitter:description" content="Aadhaar, PAN, Ration Card, online Resume/Biodata maker, PDF tools aur Sarkari Result ke sabhi official links yahan dekhein.">
-    <meta property="twitter:image" content="https://ibb.co/hRmxN7dr">
+    <meta property="twitter:image" content="https://i.ibb.co/1GzcX8K0/In-Shot-20261117-163953560.png">
 
-    <!-- Schema.org JSON-LD for Google Search Rich Results -->
+    <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -53,7 +54,7 @@
       "@type": "Organization",
       "name": "AZAD HELPER",
       "url": "https://azadhelper.online/",
-      "logo": "https://ibb.co/hRmxN7dr",
+      "logo": "https://i.ibb.co/1GzcX8K0/In-Shot-20261117-163953560.png",
       "description": "Your trusted digital companion for Indian government services, document making tools, and educational resources."
     }
     </script>
@@ -61,246 +62,511 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS for utility layout structure -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tone.js for Soft Tactile Clay Sound Effects -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        brand: {
-                            bg: '#FFFFFF',
-                            text: '#111111',
-                            border: '#111111',
-                            accent: '#2563EB',
-                            accentLight: '#60A5FA',
-                        }
-                    },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    borderRadius: {
-                        'clay': '22px',
+                        sans: ['Inter', 'Noto Sans Devanagari', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
+
     <style>
-        /* CSS Variables & Pure White Claymorphism System */
+        /* =========================================================
+           CLAYMORPHISM DESIGN SYSTEM (Light Surface for Black Logo)
+           ========================================================= */
         :root {
-            ----bg-color: #F3F7FF;
-            --text-color: #111111;
-            --border-color: #111111;
-            --accent-color: #2563EB;
-            --clay-radius: 22px;
-            
-            /* Layered 3D Clay Soft Shadows */
-            --clay-shadow: 
-                8px 12px 20px -4px rgba(17, 17, 17, 0.07),
-                4px 6px 12px 0px rgba(0, 0, 0, 0.04),
-                inset -4px -4px 8px 0px rgba(0, 0, 0, 0.03),
-                inset 4px 4px 8px 0px rgba(255, 255, 255, 1.0);
-
-            --clay-shadow-hover: 
-                12px 18px 28px -4px rgba(17, 17, 17, 0.12),
-                6px 10px 16px 0px rgba(0, 0, 0, 0.06),
-                inset -3px -3px 6px 0px rgba(0, 0, 0, 0.02),
-                inset 3px 3px 6px 0px rgba(255, 255, 255, 1.0);
-
-            --clay-shadow-pressed: 
-                2px 3px 8px 0px rgba(17, 17, 17, 0.08),
-                inset 3px 3px 6px 0px rgba(0, 0, 0, 0.06),
-                inset -3px -3px 6px 0px rgba(255, 255, 255, 0.9);
-
-            --clay-input-shadow:
-                inset 3px 4px 8px 0px rgba(0, 0, 0, 0.06),
-                inset -3px -3px 6px 0px rgba(255, 255, 255, 0.8),
-                0px 4px 12px rgba(0, 0, 0, 0.03);
+            --clay-bg: #EBF0F7;
+            --clay-surface: #F7FAFF;
+            --clay-ink: #111827;
+            --clay-muted: #4B5563;
+            --clay-accent: #1D4ED8;
         }
 
-body {
-    min-height: 100vh;
-    background-color: #F3F7FF;
+        html, body {
+            background-color: var(--clay-bg);
+            background-image: 
+                radial-gradient(at 10% 5%, rgba(255, 255, 255, 0.9) 0px, transparent 45%),
+                radial-gradient(at 90% 15%, rgba(219, 234, 254, 0.75) 0px, transparent 50%),
+                radial-gradient(at 50% 90%, rgba(224, 242, 254, 0.7) 0px, transparent 50%);
+            color: var(--clay-ink);
+            font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    background-image:
-        radial-gradient(circle at 10% 15%,
-            rgba(37, 99, 235, 0.07) 0,
-            rgba(37, 99, 235, 0.07) 2px,
-            transparent 3px),
+        /* Signature Clay Hero Header (Soft Crisp Ivory-Sky Surface so Black PNG Logo Pops) */
+        .clay-hero {
+            background: linear-gradient(145deg, #FFFFFF 0%, #F1F6FD 55%, #E4EEFB 100%);
+            border-radius: 0 0 36px 36px;
+            box-shadow: 
+                0 18px 36px -10px rgba(15, 23, 42, 0.10),
+                inset 0 -8px 18px rgba(186, 208, 238, 0.45),
+                inset 0 6px 14px rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+        }
 
-        radial-gradient(circle at 85% 25%,
-            rgba(37, 99, 235, 0.06) 0,
-            rgba(37, 99, 235, 0.06) 90px,
-            transparent 91px),
-
-        radial-gradient(circle at 15% 75%,
-            rgba(37, 99, 235, 0.05) 0,
-            rgba(37, 99, 235, 0.05) 130px,
-            transparent 131px),
-
-        radial-gradient(circle at 90% 85%,
-            rgba(37, 99, 235, 0.06) 0,
-            rgba(37, 99, 235, 0.06) 3px,
-            transparent 4px),
-
-        linear-gradient(
-            135deg,
-            #F3F7FF 0%,
-            #EDF4FF 50%,
-            #F8FAFF 100%
-        );
-
-    background-size:
-        28px 28px,
-        100% 100%,
-        100% 100%,
-        32px 32px,
-        100% 100%;
-
-    background-attachment: fixed;
-}
-
-        
-        /* Standard Clay Container */
+        /* Universal Clay Card */
         .clay-card {
-            background-color: #FFFFFF;
-            border: 1.5px solid var(--border-color);
-            border-radius: var(--clay-radius);
-            box-shadow: var(--clay-shadow);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(145deg, #FFFFFF 0%, #F4F8FF 100%);
+            border-radius: 26px;
+            border: 1.5px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                10px 10px 22px rgba(163, 177, 198, 0.35),
+                -8px -8px 18px rgba(255, 255, 255, 0.95),
+                inset 2px 2px 6px rgba(255, 255, 255, 0.9),
+                inset -3px -4px 8px rgba(180, 196, 220, 0.32);
+            transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
         }
 
-        .clay-card-interactive {
-            cursor: pointer;
-            user-select: none;
+        .clay-card:active {
+            transform: scale(0.97);
+            box-shadow: 
+                4px 4px 10px rgba(163, 177, 198, 0.35),
+                -3px -3px 8px rgba(255, 255, 255, 0.9),
+                inset 3px 3px 8px rgba(163, 177, 198, 0.28);
         }
 
-        .clay-card-interactive:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--clay-shadow-hover);
-            border-color: var(--border-color);
+        @media (hover: hover) {
+            .clay-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 
+                    14px 16px 28px rgba(163, 177, 198, 0.42),
+                    -10px -10px 22px rgba(255, 255, 255, 1),
+                    inset 2px 2px 6px rgba(255, 255, 255, 0.95),
+                    inset -3px -4px 10px rgba(180, 196, 220, 0.35);
+            }
         }
 
-        .clay-card-interactive:active {
-            transform: translateY(1px);
-            box-shadow: var(--clay-shadow-pressed);
+        /* Pastel Clay Category Cards */
+        .clay-cat-orange {
+            background: linear-gradient(145deg, #FFFDF8 0%, #FFF1D6 100%);
+            border-radius: 28px;
+            border: 1.5px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                8px 10px 20px rgba(217, 165, 92, 0.22),
+                -6px -6px 16px rgba(255, 255, 255, 0.95),
+                inset 2px 2px 6px rgba(255, 255, 255, 0.95),
+                inset -3px -4px 9px rgba(235, 185, 110, 0.32);
+            transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        /* Inputs & Dropdowns */
-        .clay-input-wrapper {
-            background-color: #FFFFFF;
-            border: 1.5px solid var(--border-color);
+        .clay-cat-blue {
+            background: linear-gradient(145deg, #F8FBFF 0%, #E1EEFF 100%);
+            border-radius: 28px;
+            border: 1.5px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                8px 10px 20px rgba(120, 158, 218, 0.24),
+                -6px -6px 16px rgba(255, 255, 255, 0.95),
+                inset 2px 2px 6px rgba(255, 255, 255, 0.95),
+                inset -3px -4px 9px rgba(145, 182, 238, 0.35);
+            transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .clay-cat-green {
+            background: linear-gradient(145deg, #F7FDFB 0%, #DCF7EC 100%);
+            border-radius: 28px;
+            border: 1.5px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                8px 10px 20px rgba(110, 188, 155, 0.22),
+                -6px -6px 16px rgba(255, 255, 255, 0.95),
+                inset 2px 2px 6px rgba(255, 255, 255, 0.95),
+                inset -3px -4px 9px rgba(132, 210, 178, 0.34);
+            transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .clay-cat-orange:hover, .clay-cat-blue:hover, .clay-cat-green:hover {
+            transform: translateY(-4px) scale(1.01);
+        }
+        .clay-cat-orange:active, .clay-cat-blue:active, .clay-cat-green:active {
+            transform: scale(0.96);
+        }
+
+        /* Recessed Clay Search Input Well */
+        .clay-search-well {
+            background: #F4F8FF;
+            border-radius: 24px;
+            border: 1.5px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                inset 5px 5px 11px rgba(163, 180, 206, 0.36),
+                inset -5px -5px 11px rgba(255, 255, 255, 0.98),
+                0 10px 24px rgba(15, 23, 42, 0.06);
+            transition: all 0.25s ease;
+        }
+
+        .clay-search-well:focus-within {
+            background: #FFFFFF;
+            box-shadow: 
+                inset 3px 3px 8px rgba(163, 180, 206, 0.25),
+                inset -3px -3px 8px rgba(255, 255, 255, 1),
+                0 12px 28px rgba(29, 78, 216, 0.14);
+            border-color: #93C5FD;
+        }
+
+        /* Clay 3D Icon Bubble */
+        .clay-icon-bubble {
             border-radius: 20px;
-            box-shadow: var(--clay-input-shadow);
-            transition: all 0.2s ease;
+            box-shadow: 
+                5px 6px 12px rgba(15, 23, 42, 0.12),
+                -3px -3px 8px rgba(255, 255, 255, 0.9),
+                inset 2px 2px 5px rgba(255, 255, 255, 0.75),
+                inset -2px -3px 6px rgba(15, 23, 42, 0.12);
         }
 
-        .clay-input-wrapper:focus-within {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15), var(--clay-input-shadow);
+        /* Clay Pill Button */
+        .clay-pill {
+            background: linear-gradient(145deg, #FFFFFF, #EAF1FB);
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                4px 5px 10px rgba(163, 177, 198, 0.3),
+                -3px -3px 8px rgba(255, 255, 255, 0.95),
+                inset -1px -2px 4px rgba(163, 177, 198, 0.22);
+            transition: transform 0.18s ease, box-shadow 0.18s ease;
         }
 
+        .clay-pill:active {
+            transform: scale(0.95);
+        }
+
+        /* Floating Clay Bottom Bar */
+        .clay-bottom-dock {
+            background: rgba(250, 252, 255, 0.92);
+            backdrop-filter: blur(14px);
+            border-radius: 28px;
+            border: 1.5px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                0 12px 30px rgba(15, 23, 42, 0.14),
+                inset 0 2px 6px rgba(255, 255, 255, 0.95),
+                inset 0 -3px 8px rgba(175, 192, 218, 0.35);
+        }
+
+        /* Gentle Floating Animation for Hero Cartoon Badge */
+        @keyframes clayFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-5px) rotate(2deg); }
+        }
+        .animate-clay-float {
+            animation: clayFloat 3.6s ease-in-out infinite;
+        }
+
+        /* Search Dropdown Elevation */
         .clay-dropdown {
-            background-color: #FFFFFF;
-            border: 1.5px solid var(--border-color);
-            border-radius: 18px;
-            box-shadow: 0 12px 30px -5px rgba(0,0,0,0.12), 0 4px 10px rgba(0,0,0,0.04);
+            background: #FFFFFF;
+            border-radius: 24px;
+            border: 1.5px solid rgba(255, 255, 255, 0.98);
+            box-shadow: 
+                0 20px 42px -6px rgba(15, 23, 42, 0.18),
+                inset 0 -4px 10px rgba(203, 213, 225, 0.35);
         }
 
-        /* Custom Scrollbar for Dropdown */
+        /* Custom Scrollbar */
         .custom-scroll::-webkit-scrollbar {
-            width: 6px;
+            width: 5px;
         }
         .custom-scroll::-webkit-scrollbar-track {
-            background: #F1F1F1;
+            background: #F1F5F9;
             border-radius: 10px;
         }
         .custom-scroll::-webkit-scrollbar-thumb {
-            background: #D1D5DB;
+            background: #CBD5E1;
             border-radius: 10px;
         }
-        .custom-scroll::-webkit-scrollbar-thumb:hover {
-            background: #9CA3AF;
+
+        /* Drawer Transitions */
+        .drawer-backdrop {
+            transition: opacity 0.22s ease;
+        }
+        .drawer-panel {
+            transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Water Ripple on Bottom Nav */
+        nav[aria-label="Bottom Navigation"] a,
+        nav[aria-label="Bottom Navigation"] button {
+            position: relative;
+            overflow: hidden;
+            isolation: isolate;
+        }
+        .water-ripple-wave {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(29, 78, 216, 0.7);
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.18);
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            animation: waterRipple 600ms ease-out forwards;
+        }
+        @keyframes waterRipple {
+            0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.9; }
+            100% { transform: translate(-50%, -50%) scale(10); opacity: 0; }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-blue-100 selection:text-blue-900">
+<body class="min-h-screen flex flex-col pb-28">
 
-    <!-- HEADER -->
-    <header class="w-full max-w-6xl mx-auto px-4 sm:px-6 pt-6 pb-4">
-        <nav class="clay-card bg-white px-5 py-3.5 flex items-center justify-between gap-4">
-            <!-- Brand Logo (Simple Image) -->
-            <a href="index.html" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-blue-600 rounded-lg p-1" title="AZAD HELPER Home">
-                <img src="https://i.ibb.co/LzZDykgB/azad-helper-logo-1.png" alt="AZAD HELPER Logo" class="h-10 sm:h-11 w-auto transition-transform group-hover:scale-105">
-                <div class="flex flex-col">
-                    <span class="font-extrabold text-lg sm:text-xl tracking-tight text-neutral-900 leading-none">AZAD HELPER</span>
-                    <span class="text-[10px] font-semibold tracking-wider text-blue-600 uppercase mt-0.5">Digital Services</span>
-                    
-                </div>
-            </a>
+    <!-- ==========================================
+         1. CLAYMORPHISM HEADER & HERO SECTION
+         (Crisp Ivory-Sky Clay Surface so Black Logo is 100% Clear)
+         ========================================== -->
+    <header class="clay-hero relative z-30">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 pt-4 pb-8">
+            
+            <!-- Top Bar: Official Black PNG Logo (Left) + Sound Toggle & Clay Menu Button (Right) -->
+            <div class="flex items-center justify-between mb-6">
+                <a href="index.html" class="flex items-center gap-3 focus:outline-none group" title="AZAD HELPER Home">
+                    <img 
+                        src="https://i.ibb.co/1GzcX8K0/In-Shot-20261117-163953560.png"
+                        alt="AZAD HELPER Logo"
+                        class="h-12 sm:h-14 w-auto object-contain flex-shrink-0 transition-transform duration-200 group-hover:scale-105"
+                    >
+                    <div class="flex flex-col">
+                        <span class="font-black text-lg sm:text-xl tracking-tight text-slate-900 leading-none">AZAD HELPER</span>
+                        <span class="text-[10px] font-bold tracking-widest text-blue-700 uppercase mt-1">Digital Portal</span>
+                    </div>
+                </a>
 
-            <!-- Navigation Links -->
-            <div class="flex items-center gap-2 sm:gap-6">
-                <div class="hidden md:flex items-center gap-5 text-sm font-semibold">
-                    <a href="index.html" class="text-blue-600 border-b-2 border-blue-600 pb-0.5">Home</a>
-                    <a href="about.html" class="text-neutral-700 hover:text-black transition-colors">About Us</a>
-                    <a href="privacy.html" class="text-neutral-700 hover:text-black transition-colors">Privacy Policy</a>
+                <!-- Desktop Links + Sound Button + Hamburger Menu -->
+                <div class="flex items-center gap-2.5 sm:gap-4">
+                    <nav class="hidden md:flex items-center gap-4 text-sm font-semibold text-slate-600">
+                        <a href="index.html" class="text-blue-700 font-bold">Home</a>
+                        <a href="government.html" class="hover:text-slate-900 transition-colors">Government</a>
+                        <a href="documents.html" class="hover:text-slate-900 transition-colors">Documents</a>
+                        <a href="education.html" class="hover:text-slate-900 transition-colors">Education</a>
+                        <a href="about.html" class="hover:text-slate-900 transition-colors">About</a>
+                    </nav>
+
+                    <!-- Sound Effects Toggle Pill -->
+                    <button 
+                        id="soundToggleBtn" 
+                        type="button"
+                        aria-label="Toggle Sound Effects"
+                        title="Toggle UI Sound Effects"
+                        class="clay-pill w-10 h-10 flex items-center justify-center text-slate-800 hover:text-blue-700 focus:outline-none"
+                    >
+                        <svg id="soundOnIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+                        </svg>
+                        <svg id="soundOffIcon" class="w-5 h-5 hidden text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <line x1="23" y1="9" x2="17" y2="15"></line>
+                            <line x1="17" y1="9" x2="23" y2="15"></line>
+                        </svg>
+                    </button>
+
+                    <!-- Clay Hamburger Button -->
+                    <button 
+                        id="menuToggleBtn" 
+                        type="button"
+                        aria-label="Open Navigation Menu"
+                        class="clay-pill w-10 h-10 flex items-center justify-center text-slate-900 hover:text-blue-700 focus:outline-none"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="4" y1="7" x2="20" y2="7"></line>
+                            <line x1="4" y1="12" x2="20" y2="12"></line>
+                            <line x1="4" y1="17" x2="20" y2="17"></line>
+                        </svg>
+                    </button>
                 </div>
             </div>
-        </nav>
-    </header>
 
-    <!-- MAIN CONTENT WRAPPER -->
-    <main class="w-full max-w-6xl mx-auto px-4 sm:px-6 my-auto py-4">
+            <!-- Hero Heading with Friendly 3D Clay Assistant Mascot SVG -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 text-center sm:text-left">
+                <div>
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-100/80 text-blue-800 text-[11px] font-bold tracking-wide mb-2 border border-white">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        TRUSTED DIGITAL HELPER
+                    </div>
+                    <h1 class="text-[25px] sm:text-3xl font-black tracking-tight text-slate-900 leading-snug">
+                        आपकी हर जरूरत का समाधान
+                    </h1>
+                    <p class="text-xs sm:text-sm font-semibold text-slate-600 mt-1.5 tracking-wide">
+                        Government <span class="text-amber-500 mx-1">●</span> Education <span class="text-blue-600 mx-1">●</span> Documents <span class="text-emerald-600 mx-1">●</span> Tools
+                    </p>
+                </div>
 
-        <!-- SMART SEARCH BAR CONTAINER -->
-        <section class="max-w-2xl mx-auto text-left mb-6">
-            <div class="relative max-w-2xl mx-auto text-left">
-                <div class="clay-input-wrapper flex items-center px-4 py-3.5 sm:py-4">
+                <!-- Custom 3D Clay Cute Helper Robot / Mascot SVG -->
+                <div class="animate-clay-float flex-shrink-0 hidden sm:block" aria-hidden="true">
+                    <svg class="w-20 h-20 drop-shadow-md" viewBox="0 0 120 120" fill="none">
+                        <defs>
+                            <radialGradient id="clayHead" cx="35%" cy="30%" r="70%">
+                                <stop offset="0%" stop-color="#FFFFFF"/>
+                                <stop offset="65%" stop-color="#DBEAFE"/>
+                                <stop offset="100%" stop-color="#93C5FD"/>
+                            </radialGradient>
+                            <radialGradient id="clayVisor" cx="40%" cy="30%" r="70%">
+                                <stop offset="0%" stop-color="#334155"/>
+                                <stop offset="100%" stop-color="#0F172A"/>
+                            </radialGradient>
+                        </defs>
+                        <!-- Antenna -->
+                        <rect x="56" y="10" width="8" height="16" rx="4" fill="#60A5FA"/>
+                        <circle cx="60" cy="10" r="7" fill="#F59E0B"/>
+                        <!-- Ears -->
+                        <rect x="14" y="48" width="12" height="26" rx="6" fill="#3B82F6"/>
+                        <rect x="94" y="48" width="12" height="26" rx="6" fill="#3B82F6"/>
+                        <!-- Clay Head -->
+                        <rect x="22" y="24" width="76" height="68" rx="30" fill="url(#clayHead)" stroke="#FFFFFF" stroke-width="3"/>
+                        <!-- Visor Screen -->
+                        <rect x="33" y="40" width="54" height="34" rx="16" fill="url(#clayVisor)"/>
+                        <!-- Cute Happy Eyes -->
+                        <circle cx="48" cy="56" r="5" fill="#38BDF8"/>
+                        <circle cx="46.5" cy="54.5" r="1.8" fill="#FFFFFF"/>
+                        <circle cx="72" cy="56" r="5" fill="#38BDF8"/>
+                        <circle cx="70.5" cy="54.5" r="1.8" fill="#FFFFFF"/>
+                        <!-- Smile -->
+                        <path d="M55 63 Q60 68 65 63" stroke="#38BDF8" stroke-width="3" stroke-linecap="round"/>
+                        <!-- Base Collar -->
+                        <rect x="38" y="96" width="44" height="12" rx="6" fill="#2563EB"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Enhanced Smart Clay Search Box (Hindi + English + Keywords + Instant Filter Pills) -->
+            <div class="relative max-w-2xl mx-auto">
+                <div class="clay-search-well flex items-center px-4 py-3.5 sm:py-4">
                     <!-- Search Icon -->
-                    <svg class="w-6 h-6 text-neutral-800 flex-shrink-0 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="w-5 h-5 text-blue-600 flex-shrink-0 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
 
-                    <!-- Text Input -->
+                    <!-- Input -->
                     <input 
                         type="text" 
                         id="searchInput" 
-                        placeholder="Search any service (e.g. Aadhaar, Pan Card, Caste Certificate)..." 
+                        placeholder="Search Aadhaar, PAN, Biodata, Result, आय प्रमाण पत्र..." 
                         autocomplete="off" 
                         spellcheck="false"
-                        class="w-full bg-transparent text-neutral-900 placeholder-neutral-500 text-base sm:text-lg font-medium focus:outline-none"
+                        aria-label="Search services in Hindi or English"
+                        class="w-full bg-transparent text-slate-900 placeholder-slate-400 text-sm sm:text-base font-semibold focus:outline-none"
                     >
 
                     <!-- Clear Search Button -->
                     <button 
                         id="clearSearchBtn" 
+                        type="button"
                         aria-label="Clear Search Input" 
-                        class="hidden text-neutral-400 hover:text-neutral-900 p-1 rounded-full transition-colors focus:outline-none"
+                        class="hidden text-slate-500 hover:text-slate-900 p-1.5 rounded-full bg-slate-200/70 transition-colors focus:outline-none"
                     >
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <line x1="18" y1="6" x2="6" y2="18"></line>
                             <line x1="6" y1="6" x2="18" y2="18"></line>
                         </svg>
                     </button>
                 </div>
 
-                <!-- LIVE SEARCH DROPDOWN -->
-                <div id="searchResults" class="clay-dropdown hidden absolute left-0 right-0 mt-3 max-h-80 overflow-y-auto custom-scroll z-50 p-2 space-y-1">
-                    <!-- Dynamic Search Results Populated by JS -->
+                <!-- Quick Search Clay Suggestion Chips -->
+                <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pt-3 pb-1 px-1">
+                    <span class="text-[11px] font-bold text-slate-500 flex-shrink-0">Quick:</span>
+                    <button type="button" data-quick-search="Aadhaar" class="quick-chip clay-pill px-3 py-1 text-[11px] font-bold text-slate-700 hover:text-blue-700 flex-shrink-0">Aadhaar</button>
+                    <button type="button" data-quick-search="PAN Card" class="quick-chip clay-pill px-3 py-1 text-[11px] font-bold text-slate-700 hover:text-blue-700 flex-shrink-0">PAN Card</button>
+                    <button type="button" data-quick-search="Biodata" class="quick-chip clay-pill px-3 py-1 text-[11px] font-bold text-slate-700 hover:text-blue-700 flex-shrink-0">Biodata Maker</button>
+                    <button type="button" data-quick-search="Result" class="quick-chip clay-pill px-3 py-1 text-[11px] font-bold text-slate-700 hover:text-blue-700 flex-shrink-0">Sarkari Result</button>
+                    <button type="button" data-quick-search="आय" class="quick-chip clay-pill px-3 py-1 text-[11px] font-bold text-slate-700 hover:text-blue-700 flex-shrink-0">आय/जाति/निवास</button>
                 </div>
+
+                <!-- Live Smart Search Dropdown -->
+                <div id="searchResults" class="clay-dropdown hidden absolute left-0 right-0 mt-2 max-h-80 overflow-y-auto custom-scroll z-50 p-2 space-y-1.5">
+                    <!-- Populated Dynamically by JS -->
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- ==========================================
+         MAIN CONTENT WRAPPER
+         ========================================== -->
+    <main class="w-full max-w-3xl mx-auto px-4 sm:px-6 pt-7 space-y-8 flex-1">
+
+        <!-- ==========================================
+             2. EXPLORE CATEGORIES (3 Equal Clay Cards)
+             ========================================== -->
+        <section aria-labelledby="categories-heading">
+            <div class="flex items-center justify-between mb-4">
+                <h2 id="categories-heading" class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+                    Explore Categories
+                </h2>
+                <a href="Tools.html" class="clay-pill px-3 py-1 text-xs font-bold text-blue-700 hover:text-blue-800">
+                    Utility Tools →
+                </a>
+            </div>
+
+            <!-- 3 Equal-Sized Tactile Clay Category Cards -->
+            <div class="grid grid-cols-3 gap-3 sm:gap-4">
+                
+                <!-- Card 1: Government -->
+                <a href="government.html" class="clay-cat-orange p-3.5 sm:p-5 flex flex-col items-center justify-center text-center group focus:outline-none">
+                    <div class="clay-icon-bubble w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <!-- 3D Clay Pillar Building SVG -->
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="3" y1="22" x2="21" y2="22"></line>
+                            <line x1="6" y1="18" x2="6" y2="11"></line>
+                            <line x1="10" y1="18" x2="10" y2="11"></line>
+                            <line x1="14" y1="18" x2="14" y2="11"></line>
+                            <line x1="18" y1="18" x2="18" y2="11"></line>
+                            <polygon points="12 2 20 7 4 7 12 2"></polygon>
+                        </svg>
+                    </div>
+                    <span class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Government</span>
+                    <span class="text-[10px] font-semibold text-amber-800/80 mt-0.5 hidden sm:block">सरकारी सेवाएं</span>
+                </a>
+
+                <!-- Card 2: Education -->
+                <a href="education.html" class="clay-cat-blue p-3.5 sm:p-5 flex flex-col items-center justify-center text-center group focus:outline-none">
+                    <div class="clay-icon-bubble w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <!-- 3D Clay Graduation Cap SVG -->
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Education</span>
+                    <span class="text-[10px] font-semibold text-blue-800/80 mt-0.5 hidden sm:block">शिक्षा और जॉब्स</span>
+                </a>
+
+                <!-- Card 3: Documents -->
+                <a href="documents.html" class="clay-cat-green p-3.5 sm:p-5 flex flex-col items-center justify-center text-center group focus:outline-none">
+                    <div class="clay-icon-bubble w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-emerald-400 to-teal-600 text-white flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                        <!-- 3D Clay Document SVG -->
+                        <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                        </svg>
+                    </div>
+                    <span class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Documents</span>
+                    <span class="text-[10px] font-semibold text-emerald-800/80 mt-0.5 hidden sm:block">प्रमाण पत्र और फॉर्म</span>
+                </a>
+
             </div>
         </section>
 
-        <!-- DYNAMIC ADVERTISEMENT BANNER -->
-        <div id="dynamic-ad-container" class="hidden max-w-2xl mx-auto w-full relative mb-8">
-                  <div class="relative overflow-hidden bg-white border border-neutral-300 rounded-[22px] aspect-[21/9] transition-all">
+        <!-- ==========================================
+             DYNAMIC ADVERTISEMENT BANNER (Firebase Preserved)
+             ========================================== -->
+        <div id="dynamic-ad-container" class="hidden w-full relative">
+            <div class="clay-card relative overflow-hidden aspect-[21/9]">
                 <!-- Loader -->
-                <div id="ad-loader" class="absolute inset-0 flex items-center justify-center bg-white z-10">
-                    <svg class="w-8 h-8 animate-spin text-blue-600" fill="none" viewBox="0 0 24 24">
+                <div id="ad-loader" class="absolute inset-0 flex items-center justify-center bg-white/90 z-10">
+                    <svg class="w-7 h-7 animate-spin text-blue-600" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -312,124 +578,323 @@ body {
                 </a>
 
                 <!-- Ad Label -->
-<span class="absolute top-3 right-3 bg-blue-50 border border-black text-blue-700 text-[9px] px-2.5 py-1 rounded-[10px] font-black z-20 uppercase tracking-widest">
-    Ads
-</span>
+                <span class="absolute top-3 right-3 bg-white/95 border border-slate-200 text-slate-800 text-[9px] px-2.5 py-0.5 rounded-full font-extrabold z-20 uppercase tracking-widest shadow-sm">
+                    Ads
+                </span>
             </div>
         </div>
 
-        <!-- EXPLORE CATEGORIES SECTION -->
-        <section class="max-w-4xl mx-auto my-10">
-            <!-- Section Header -->
-            <div class="flex items-center justify-between mb-6 px-1">
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-neutral-900 tracking-tight">
-                    Explore Categories
+        <!-- ==========================================
+             3. LATEST UPDATES SECTION (Clay Cards)
+             ========================================== -->
+        <section aria-labelledby="updates-heading">
+            <div class="flex items-center justify-between mb-4">
+                <h2 id="updates-heading" class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+                    Latest Updates
                 </h2>
-                <span class="text-xs font-bold text-neutral-500 uppercase tracking-wider">services</span>
+                <span class="clay-pill px-3 py-1 text-[11px] font-bold text-slate-600">Official Links</span>
             </div>
 
-            <!-- CATEGORY GRID -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
-
-                <!-- CATEGORY 1: GOVERNMENT -->
-                <a href="government.html" class="clay-card clay-card-interactive p-6 flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-blue-600">
-                    <div class="flex items-center gap-5">
-                        <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                            <svg class="w-8 h-8 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="3" y1="22" x2="21" y2="22"></line>
-                                <line x1="6" y1="18" x2="6" y2="11"></line>
-                                <line x1="10" y1="18" x2="10" y2="11"></line>
-                                <line x1="14" y1="18" x2="14" y2="11"></line>
-                                <line x1="18" y1="18" x2="18" y2="11"></line>
-                                <polygon points="12 2 20 7 4 7 12 2"></polygon>
+            <div class="space-y-4">
+                <!-- Update Card 1 -->
+                <article class="clay-card p-5">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-amber-100 text-amber-800 border border-white shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span>
+                            NEW UPDATE
+                        </span>
+                        <span class="text-[11px] font-bold text-slate-400">Government</span>
+                    </div>
+                    <h3 class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug">
+                        Aadhaar, PAN Card & Bihar RTPS Services
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
+                        Direct official portals for Aadhaar download, PAN correction, Caste, Income & Residence certificates.
+                    </p>
+                    <div class="mt-4 pt-3 border-t border-slate-200/70 flex items-center justify-between">
+                        <a href="government.html" class="clay-pill inline-flex items-center gap-1.5 px-4 py-1.5 text-xs sm:text-sm font-extrabold text-blue-700 hover:text-blue-800">
+                            View Details
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-neutral-900 tracking-tight">Government</h3>
-                        
-                      
+                        </a>
                     </div>
-                    <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-200 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                        <svg class="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </div>
-                </a>
+                </article>
 
-                <!-- CATEGORY 2: DOCUMENTS -->
-                <a href="documents.html" class="clay-card clay-card-interactive p-6 flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-blue-600">
-                    <div class="flex items-center gap-5">
-                        <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                            <svg class="w-8 h-8 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Update Card 2 -->
+                <article class="clay-card p-5">
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-blue-100 text-blue-800 border border-white shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-blue-600"></span>
+                            NEW UPDATE
+                        </span>
+                        <span class="text-[11px] font-bold text-slate-400">Education & Jobs</span>
+                    </div>
+                    <h3 class="text-base sm:text-lg font-extrabold text-slate-900 leading-snug">
+                        Sarkari Result, Admit Card & Scholarship Portal
+                    </h3>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
+                        Check latest board exam results, university admissions, government job vacancies & NSP scholarship status.
+                    </p>
+                    <div class="mt-4 pt-3 border-t border-slate-200/70 flex items-center justify-between">
+                        <a href="education.html" class="clay-pill inline-flex items-center gap-1.5 px-4 py-1.5 text-xs sm:text-sm font-extrabold text-blue-700 hover:text-blue-800">
+                            View Details
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             4. POPULAR TOOLS SECTION (2-Column Clay Grid)
+             ========================================== -->
+        <section aria-labelledby="tools-heading">
+            <div class="flex items-center justify-between mb-4">
+                <h2 id="tools-heading" class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+                    Popular Tools
+                </h2>
+                <a href="documents.html" class="clay-pill px-3 py-1 text-xs font-bold text-blue-700 hover:text-blue-800">
+                    All Documents →
+                </a>
+            </div>
+
+            <!-- Two-Column Clay Grid -->
+            <div class="grid grid-cols-2 gap-3.5 sm:gap-4">
+                
+                <!-- Tool 1: Resume Maker -->
+                <a href="documents.html" class="clay-card p-4 sm:p-5 flex flex-col justify-between group focus:outline-none">
+                    <div>
+                        <div class="clay-icon-bubble w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-700 text-white flex items-center justify-center mb-3.5 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
                                 <polyline points="14 2 14 8 20 8"></polyline>
                                 <line x1="16" y1="13" x2="8" y2="13"></line>
                                 <line x1="16" y1="17" x2="8" y2="17"></line>
-                                <polyline points="10 9 9 9 8 9"></polyline>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-neutral-900 tracking-tight">Documents</h3>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-200 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                        <svg class="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
+                        <h3 class="text-sm sm:text-base font-extrabold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
+                            Resume Maker
+                        </h3>
+                        <p class="text-[11px] sm:text-xs text-slate-600 mt-1 line-clamp-2 leading-relaxed">
+                            Create clean, professional job resumes online in minutes.
+                        </p>
                     </div>
                 </a>
 
-                <!-- CATEGORY 3: EDUCATION -->
-                <a href="education.html" class="clay-card clay-card-interactive p-6 flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-blue-600">
-                    <div class="flex items-center gap-5">
-                        <div class="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center flex-shrink-0 text-blue-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                            <svg class="w-8 h-8 stroke-current fill-none" viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-                                <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                <!-- Tool 2: Marriage Biodata Maker -->
+                <a href="mairragebiodatamaker.html" class="clay-card p-4 sm:p-5 flex flex-col justify-between group focus:outline-none">
+                    <div>
+                        <div class="clay-icon-bubble w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 text-white flex items-center justify-center mb-3.5 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
                             </svg>
                         </div>
-                        <h3 class="text-xl font-bold text-neutral-900 tracking-tight">Education</h3>
-                    </div>
-                    <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-200 group-hover:bg-blue-600 group-hover:text-white transition-all">
-                        <svg class="w-5 h-5 transform group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
+                        <h3 class="text-sm sm:text-base font-extrabold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
+                            Marriage Biodata Maker
+                        </h3>
+                        <p class="text-[11px] sm:text-xs text-slate-600 mt-1 line-clamp-2 leading-relaxed">
+                            Traditional & modern marriage biodata formats ready to print.
+                        </p>
                     </div>
                 </a>
 
-                
+                <!-- Tool 3: PDF Tools -->
+                <a href="documents.html" class="clay-card p-4 sm:p-5 flex flex-col justify-between group focus:outline-none">
+                    <div>
+                        <div class="clay-icon-bubble w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-600 text-white flex items-center justify-center mb-3.5 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                                <polyline points="13 2 13 9 20 9"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="text-sm sm:text-base font-extrabold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
+                            PDF Tools
+                        </h3>
+                        <p class="text-[11px] sm:text-xs text-slate-600 mt-1 line-clamp-2 leading-relaxed">
+                            Merge, compress & convert PDF files for online applications.
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Tool 4: Image Tools -->
+                <a href="documents.html" class="clay-card p-4 sm:p-5 flex flex-col justify-between group focus:outline-none">
+                    <div>
+                        <div class="clay-icon-bubble w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-600 text-white flex items-center justify-center mb-3.5 group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                        </div>
+                        <h3 class="text-sm sm:text-base font-extrabold text-slate-900 leading-snug group-hover:text-blue-700 transition-colors">
+                            Image Tools
+                        </h3>
+                        <p class="text-[11px] sm:text-xs text-slate-600 mt-1 line-clamp-2 leading-relaxed">
+                            Resize passport photos & reduce KB size for govt forms.
+                        </p>
+                    </div>
+                </a>
 
             </div>
         </section>
+
+        <!-- ==========================================
+             PORTAL INFO & CLAY FOOTER (Uses Same Black Header Logo)
+             ========================================== -->
+        <footer class="clay-card p-6 text-center space-y-3.5 mt-4">
+            <div class="flex items-center justify-center gap-3">
+                <img src="https://i.ibb.co/1GzcX8K0/In-Shot-20261117-163953560.png" alt="AZAD HELPER Logo" class="h-12 w-auto object-contain">
+                <span class="font-black text-lg text-slate-900 tracking-tight">AZAD HELPER</span>
+            </div>
+            <p class="text-xs text-slate-600 max-w-lg mx-auto leading-relaxed">
+                AZAD HELPER is your trusted digital companion, simplifying access to essential government services, educational resources, and vital documents.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-3 text-xs font-bold text-slate-700 pt-1">
+                <a href="index.html" class="hover:text-blue-700 transition-colors">Home</a>
+                <span class="text-slate-300">•</span>
+                <a href="government.html" class="hover:text-blue-700 transition-colors">Government</a>
+                <span class="text-slate-300">•</span>
+                <a href="documents.html" class="hover:text-blue-700 transition-colors">Documents</a>
+                <span class="text-slate-300">•</span>
+                <a href="education.html" class="hover:text-blue-700 transition-colors">Education</a>
+                <span class="text-slate-300">•</span>
+                <a href="about.html" class="hover:text-blue-700 transition-colors">About Us</a>
+                <span class="text-slate-300">•</span>
+                <a href="privacy.html" class="hover:text-blue-700 transition-colors">Privacy Policy</a>
+            </div>
+            <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider pt-1">
+                © <span id="year"></span> AZAD HELPER. ALL RIGHTS RESERVED.
+            </p>
+        </footer>
+
     </main>
 
-    <!-- FOOTER (Digital Art Museum Style) -->
-    <footer class="w-full max-w-6xl mx-auto px-4 sm:px-6 pb-10 pt-6">
-        <div class="clay-card px-6 py-10 flex flex-col items-center justify-center text-center gap-5">
-            <!-- Museum Style Logo Placement -->
-            <img src="https://i.ibb.co/LzZDykgB/azad-helper-logo-1.png" alt="AZAD HELPER Logo" class="h-16 sm:h-20 w-auto object-contain">
+    <!-- ==========================================
+         5. FLOATING CLAY BOTTOM NAVIGATION BAR
+         ========================================== -->
+    <div class="fixed bottom-3 left-3 right-3 z-40 pointer-events-none">
+        <nav aria-label="Bottom Navigation" class="clay-bottom-dock max-w-2xl mx-auto grid grid-cols-5 h-16 px-2 pointer-events-auto">
             
-            <!-- About Text -->
-            <p class="max-w-2xl text-sm sm:text-base text-neutral-600 font-medium leading-relaxed px-2">
-                AZAD HELPER is your trusted digital companion, simplifying access to essential government services, educational resources, and vital documents. We empower citizens with seamless, accessible, and reliable online assistance.
-            </p>
+            <!-- 1. Home -->
+            <a href="index.html" aria-current="page" class="flex flex-col items-center justify-center gap-1 text-blue-700 focus:outline-none">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span class="text-[11px] font-extrabold leading-none">Home</span>
+            </a>
 
-            <!-- Subtle Divider -->
-            <div class="w-24 h-[1.5px] bg-neutral-200 my-3"></div>
+            <!-- 2. Government -->
+            <a href="government.html" class="flex flex-col items-center justify-center gap-1 text-slate-600 hover:text-slate-900 transition-colors focus:outline-none">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="22" x2="21" y2="22"></line>
+                    <line x1="6" y1="18" x2="6" y2="11"></line>
+                    <line x1="10" y1="18" x2="10" y2="11"></line>
+                    <line x1="14" y1="18" x2="14" y2="11"></line>
+                    <line x1="18" y1="18" x2="18" y2="11"></line>
+                    <polygon points="12 2 20 7 4 7 12 2"></polygon>
+                </svg>
+                <span class="text-[11px] font-semibold leading-none">Government</span>
+            </a>
 
-            <!-- Footer Links & Copyright -->
-            <div class="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full justify-between mt-2 px-2">
-                <span class="text-xs font-bold text-neutral-400 uppercase tracking-wider">© <span id="year"></span> AZAD HELPER. ALL RIGHTS RESERVED.</span>
-                <div class="flex items-center gap-6 text-xs sm:text-sm font-semibold">
-                    <a href="index.html" class="text-neutral-700 hover:text-blue-600 transition-colors">Home</a>
-                    <a href="about.html" class="text-neutral-700 hover:text-blue-600 transition-colors">About Us</a>
-                    <a href="privacy.html" class="text-neutral-700 hover:text-blue-600 transition-colors">Privacy Policy</a>
+            <!-- 3. Education -->
+            <a href="education.html" class="flex flex-col items-center justify-center gap-1 text-slate-600 hover:text-slate-900 transition-colors focus:outline-none">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
+                    <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+                </svg>
+                <span class="text-[11px] font-semibold leading-none">Education</span>
+            </a>
+
+            <!-- 4. Documents -->
+            <a href="documents.html" class="flex flex-col items-center justify-center gap-1 text-slate-600 hover:text-slate-900 transition-colors focus:outline-none">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+                <span class="text-[11px] font-semibold leading-none">Documents</span>
+            </a>
+
+            <!-- 5. More (Opens Drawer) -->
+            <button id="bottomMoreBtn" type="button" class="flex flex-col items-center justify-center gap-1 text-slate-600 hover:text-slate-900 transition-colors focus:outline-none">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="7" height="7" rx="2"></rect>
+                    <rect x="14" y="3" width="7" height="7" rx="2"></rect>
+                    <rect x="14" y="14" width="7" height="7" rx="2"></rect>
+                    <rect x="3" y="14" width="7" height="7" rx="2"></rect>
+                </svg>
+                <span class="text-[11px] font-semibold leading-none">More</span>
+            </button>
+
+        </nav>
+    </div>
+
+    <!-- ==========================================
+         SLIDE-OVER CLAY NAVIGATION DRAWER (Uses Same Black Logo)
+         ========================================== -->
+    <div id="navDrawerBackdrop" class="drawer-backdrop fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-50 hidden opacity-0" aria-hidden="true">
+        <div id="navDrawerPanel" class="drawer-panel fixed top-3 right-3 bottom-3 w-72 max-w-[84vw] bg-[#F7FAFF] rounded-[30px] border-2 border-white shadow-2xl flex flex-col justify-between translate-x-[110%]">
+            
+            <div>
+                <!-- Drawer Header with Black Logo -->
+                <div class="px-5 py-4 border-b border-slate-200/70 flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <img src="https://i.ibb.co/1GzcX8K0/In-Shot-20261117-163953560.png" alt="AZAD HELPER Logo" class="h-11 w-auto object-contain">
+                        <span class="font-black text-sm text-slate-900 tracking-tight">AZAD HELPER</span>
+                    </div>
+                    <button id="closeDrawerBtn" type="button" aria-label="Close Menu" class="clay-pill p-2 text-slate-800 hover:text-blue-700">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Drawer Links -->
+                <div class="p-4 space-y-1.5">
+                    <p class="px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Categories</p>
+                    <a href="index.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-blue-100/80 text-blue-800 font-extrabold text-sm shadow-xs">
+                        <span>Home</span>
+                    </a>
+                    <a href="government.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-800 hover:bg-white font-bold text-sm transition-colors">
+                        <span>Government Services</span>
+                    </a>
+                    <a href="documents.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-800 hover:bg-white font-bold text-sm transition-colors">
+                        <span>Documents Works</span>
+                    </a>
+                    <a href="education.html" class="flex items-center gap-3 px-4 py-3 rounded-2xl text-slate-800 hover:bg-white font-bold text-sm transition-colors">
+                        <span>Education & Jobs</span>
+                    </a>
+
+
+                    <div class="my-3 border-t border-slate-200/70"></div>
+                    <p class="px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-slate-400">Information</p>
+                    <a href="about.html" class="flex items-center gap-3 px-4 py-2.5 rounded-2xl text-slate-600 hover:bg-white font-semibold text-sm transition-colors">
+                        <span>About Us</span>
+                    </a>
+                    <a href="privacy.html" class="flex items-center gap-3 px-4 py-2.5 rounded-2xl text-slate-600 hover:bg-white font-semibold text-sm transition-colors">
+                        <span>Privacy Policy</span>
+                    </a>
                 </div>
             </div>
-        </div>
-    </footer>
 
-    <!-- FIREBASE AND APP LOGIC SCRIPT -->
+            <div class="p-4 border-t border-slate-200/70 text-center">
+                <span class="text-[11px] font-bold text-slate-400">azadhelper.online</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         FIREBASE ADS SCRIPT (Preserved Exact Logic)
+         ========================================== -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
@@ -478,7 +943,6 @@ body {
             activeAdsList = [];
 
             try {
-                // Using Promise.race to add a 6-second timeout for slow connections
                 const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error("Firebase Timeout")), 6000));
                 
                 const adsQuery = query(
@@ -543,10 +1007,8 @@ body {
 
             if (!img || !link) return;
 
-            // Fade out current image before swapping
             img.style.opacity = "0";
 
-            // Wait for fade out to complete (Guptaji Style)
             setTimeout(() => {
                 link.href = ad.targetUrl || "#";
                 img.src = ad.mediaUrl;
@@ -565,45 +1027,107 @@ body {
             }, 350); 
         }
 
-        // Initialize Ads on Load
         document.addEventListener("DOMContentLoaded", () => {
             fetchAds();
         });
     </script>
 
-    <!-- UI & SEARCH SCRIPT -->
+    <!-- ==========================================
+         UI, SMART SEARCH, SOUND EFFECTS & DRAWER SCRIPT
+         ========================================== -->
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
+        /* ------------------------------------------
+           1. TACTILE CLAY SOUND EFFECTS (Tone.js)
+           ------------------------------------------ */
+        let soundEnabled = true;
+        let popSynth = null;
+
+        function playClayPop(freq = 520) {
+            if (!soundEnabled || typeof Tone === 'undefined') return;
+            try {
+                if (Tone.context.state !== 'running') {
+                    Tone.start();
+                }
+                if (!popSynth) {
+                    popSynth = new Tone.Synth({
+                        oscillator: { type: "sine" },
+                        envelope: { attack: 0.005, decay: 0.07, sustain: 0, release: 0.05 }
+                    }).toDestination();
+                    popSynth.volume.value = -16;
+                }
+                popSynth.triggerAttackRelease(freq, "32n");
+            } catch (err) {
+                // Silent fallback if audio blocked
+            }
+        }
+
+        const soundToggleBtn = document.getElementById('soundToggleBtn');
+        const soundOnIcon = document.getElementById('soundOnIcon');
+        const soundOffIcon = document.getElementById('soundOffIcon');
+
+        soundToggleBtn.addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            soundOnIcon.classList.toggle('hidden', !soundEnabled);
+            soundOffIcon.classList.toggle('hidden', soundEnabled);
+            if (soundEnabled) playClayPop(660);
+        });
+
+        // Attach subtle clay pop sound to interactive cards & buttons
+        document.addEventListener('click', (e) => {
+            const clickable = e.target.closest('a, button');
+            if (clickable && clickable.id !== 'soundToggleBtn') {
+                playClayPop(480);
+            }
+        });
+
+        /* ------------------------------------------
+           2. SMART MULTI-KEYWORD SEARCH ENGINE
+              (Matches Hindi, English, URLs & Partial Words)
+           ------------------------------------------ */
         const searchDataset = [
-            { title: "Government", category: "Government", page: "Government.html", keywords: ["government", "sarkari", "सरकारी", "gov", "yojana", "scheme"] },
-            { title: "Documents", category: "Documents", page: "Documents.html", keywords: ["documents", "certificate", "praman patra", "प्रमाण पत्र", "docs", "paperwork"] },
-            { title: "Education", category: "Education", page: "Education.html", keywords: ["education", "padhai", "शिक्षा", "school", "college", "exam", "result", "scholarship"] },
-            { title: "Tools", category: "Tools", page: "Tools.html", keywords: ["tools", "calculator", "converter", "utility", "उपकरण", "pdf", "image"] },
-            { title: "Aadhaar Card Services", category: "Government", page: "Government.html", keywords: ["aadhaar", "adhar", "uidai", "aadhaar update", "download aadhaar", "आधार"] },
-            { title: "PAN Card Application & Correction", category: "Government", page: "Government.html", keywords: ["pan card", "nsdl", "uti", "pan update", "pancard", "पैन कार्ड"] },
-            { title: "PM Kisan Samman Nidhi", category: "Government", page: "Government.html", keywords: ["pm kisan", "kisan", "farmer", "installment", "kyst", "किसान"] },
-            { title: "Ayushman Bharat Golden Card", category: "Government", page: "Government.html", keywords: ["ayushman", "health card", "5 lakh", "pmjay", "आयुष्मान"] },
-            { title: "E-Shram Card Registration", category: "Government", page: "Government.html", keywords: ["e-shram", "eshram", "labour card", "majdoor", "ई श्रम"] },
-            { title: "Ration Card Apply & Status", category: "Government", page: "Government.html", keywords: ["ration card", "rashan", "epds", "nfsa", "राशन कार्ड"] },
-            { title: "Income Certificate (आय प्रमाण पत्र)", category: "Documents", page: "Documents.html", keywords: ["income certificate", "aay praman patra", "income", "आय"] },
-            { title: "Caste Certificate (जाति प्रमाण पत्र)", category: "Documents", page: "Documents.html", keywords: ["caste certificate", "jati praman patra", "sc st obc", "जाति"] },
-            { title: "Residence Certificate (निवास प्रमाण पत्र)", category: "Documents", page: "Documents.html", keywords: ["residence certificate", "niwas praman patra", "domicile", "निवास"] },
-            { title: "Birth & Death Certificate", category: "Documents", page: "Documents.html", keywords: ["birth certificate", "death certificate", "janam praman patra", "जन्म प्रमाण पत्र"] },
-            { title: "Character Certificate (चरित्र प्रमाण पत्र)", category: "Documents", page: "Documents.html", keywords: ["character certificate", "police verification", "charitra", "चरित्र"] },
-            { title: "Scholarship Portal & Applications", category: "Education", page: "Education.html", keywords: ["scholarship", " छात्रवृत्ति", "nsp", "scholarship status"] },
-            { title: "Board Exam Results & Admit Cards", category: "Education", page: "Education.html", keywords: ["result", "admit card", "board exam", "10th result", "12th result", "परीक्षा"] },
-            { title: "College & University Admissions", category: "Education", page: "Education.html", keywords: ["admission", "university", "college form", "ug pg", "दाखिला"] },
-            { title: "Sarkari Job Exam Preparation", category: "Education", page: "Education.html", keywords: ["sarkari result", "job", "recruitment", "vacancy", "सरकारी नौकरी"] },
-            { title: "PDF Merger & Compressor Tool", category: "Tools", page: "Tools.html", keywords: ["pdf merge", "pdf compress", "pdf size reduce", "pdf editor"] },
-            { title: "Image Resizer for Govt Forms", category: "Tools", page: "Tools.html", keywords: ["image resizer", "photo resize", "kb reducer", "passport photo resize"] },
-            { title: "Age & Date Calculator", category: "Tools", page: "Tools.html", keywords: ["age calculator", "dob calculator", "age count", "उम्र कैलकुलेटर"] },
+            { title: "Government Services (सरकारी सेवाएं)", category: "Government", page: "government.html", keywords: ["government", "sarkari", "सरकारी", "gov", "yojana", "scheme", "rtps", "bihar"] },
+            { title: "Documents & Certificates (प्रमाण पत्र)", category: "Documents", page: "documents.html", keywords: ["documents", "certificate", "praman patra", "प्रमाण पत्र", "docs", "paperwork"] },
+            { title: "Education & Results (शिक्षा और परीक्षा)", category: "Education", page: "education.html", keywords: ["education", "padhai", "शिक्षा", "school", "college", "exam", "result", "scholarship"] },
+            { title: "Utility Tools (डिजिटल टूल्स)", category: "Tools", page: "Tools.html", keywords: ["tools", "calculator", "converter", "utility", "उपकरण", "pdf", "image"] },
+            { title: "Aadhaar Card Services (आधार कार्ड)", category: "Government", page: "government.html", keywords: ["aadhaar", "adhar", "uidai", "aadhaar update", "download aadhaar", "आधार", "pvc"] },
+            { title: "PAN Card Apply & Correction (पैन कार्ड)", category: "Government", page: "government.html", keywords: ["pan card", "nsdl", "uti", "pan update", "pancard", "पैन कार्ड", "pan"] },
+            { title: "PM Kisan Samman Nidhi (पीएम किसान)", category: "Government", page: "government.html", keywords: ["pm kisan", "kisan", "farmer", "installment", "kyc", "किसान", "kheti"] },
+            { title: "Ayushman Bharat Card (आयुष्मान कार्ड)", category: "Government", page: "government.html", keywords: ["ayushman", "health card", "5 lakh", "pmjay", "आयुष्मान", "hospital"] },
+            { title: "E-Shram Card Registration (ई-श्रम कार्ड)", category: "Government", page: "government.html", keywords: ["e-shram", "eshram", "labour card", "majdoor", "ई श्रम", "shramik"] },
+            { title: "Ration Card Apply & Status (राशन कार्ड)", category: "Government", page: "government.html", keywords: ["ration card", "rashan", "epds", "nfsa", "राशन कार्ड", "राशन"] },
+            { title: "Income Certificate (आय प्रमाण पत्र)", category: "Documents", page: "documents.html", keywords: ["income certificate", "aay praman patra", "income", "आय", "rtps", "aay"] },
+            { title: "Caste Certificate (जाति प्रमाण पत्र)", category: "Documents", page: "documents.html", keywords: ["caste certificate", "jati praman patra", "sc st obc", "जाति", "jati"] },
+            { title: "Residence Certificate (निवास प्रमाण पत्र)", category: "Documents", page: "documents.html", keywords: ["residence certificate", "niwas praman patra", "domicile", "निवास", "awasiya"] },
+            { title: "Birth & Death Certificate (जन्म प्रमाण पत्र)", category: "Documents", page: "documents.html", keywords: ["birth certificate", "death certificate", "janam praman patra", "जन्म प्रमाण पत्र", "janam"] },
+            { title: "Character Certificate (चरित्र प्रमाण पत्र)", category: "Documents", page: "documents.html", keywords: ["character certificate", "police verification", "charitra", "चरित्र", "aacharan"] },
+            { title: "Marriage Biodata Maker (शादी बायोडाटा)", category: "Documents", page: "mairragebiodatamaker.html", keywords: ["marriage biodata", "shadi biodata", "biodata maker", "शादी", "बायोडाटा", "vivah"] },
+            { title: "Resume & CV Maker (रिज्यूमे मेकर)", category: "Documents", page: "documents.html", keywords: ["resume", "cv maker", "job resume", "biodata", "रिज्यूमे"] },
+            { title: "Scholarship Portal & Status (छात्रवृत्ति)", category: "Education", page: "education.html", keywords: ["scholarship", "छात्रवृत्ति", "nsp", "scholarship status", "post matric"] },
+            { title: "Board Exam Results & Admit Cards (रिजल्ट)", category: "Education", page: "education.html", keywords: ["result", "admit card", "board exam", "10th result", "12th result", "परीक्षा", "रिजल्ट", "bseb"] },
+            { title: "College & University Admissions (दाखिला)", category: "Education", page: "education.html", keywords: ["admission", "university", "college form", "ug pg", "दाखिला", "merit list"] },
+            { title: "Sarkari Job & Vacancy Updates (सरकारी नौकरी)", category: "Education", page: "education.html", keywords: ["sarkari result", "job", "recruitment", "vacancy", "सरकारी नौकरी", "bharti"] },
+            { title: "PDF Merger & Compressor Tool", category: "Tools", page: "Tools.html", keywords: ["pdf merge", "pdf compress", "pdf size reduce", "pdf editor", "pdf"] },
+            { title: "Image Resizer for Govt Forms", category: "Tools", page: "Tools.html", keywords: ["image resizer", "photo resize", "kb reducer", "passport photo", "photo", "signature"] },
+            { title: "Age & Date Calculator (उम्र कैलकुलेटर)", category: "Tools", page: "Tools.html", keywords: ["age calculator", "dob calculator", "age count", "उम्र कैलकुलेटर", "age"] },
             { title: "Document Format Converter", category: "Tools", page: "Tools.html", keywords: ["jpg to pdf", "word to pdf", "converter", "format change"] }
         ];
 
         const searchInput = document.getElementById('searchInput');
         const searchResults = document.getElementById('searchResults');
         const clearSearchBtn = document.getElementById('clearSearchBtn');
+
+        // Quick Search Suggestion Chips
+        document.querySelectorAll('.quick-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const term = chip.getAttribute('data-quick-search');
+                searchInput.value = term;
+                clearSearchBtn.classList.remove('hidden');
+                performSearch(term.toLowerCase());
+                searchInput.focus();
+            });
+        });
 
         searchInput.addEventListener('input', (e) => {
             const query = e.target.value.trim().toLowerCase();
@@ -624,40 +1148,71 @@ body {
         });
 
         function performSearch(query) {
-            const matches = searchDataset.filter(item => {
-                const titleMatch = item.title.toLowerCase().includes(query);
-                const catMatch = item.category.toLowerCase().includes(query);
-                const keywordMatch = item.keywords.some(k => k.toLowerCase().includes(query));
-                return titleMatch || catMatch || keywordMatch;
-            });
+            const tokens = query.split(/\s+/).filter(Boolean);
 
-            matches.sort((a, b) => {
-                const aExact = a.title.toLowerCase() === query || a.category.toLowerCase() === query;
-                const bExact = b.title.toLowerCase() === query || b.category.toLowerCase() === query;
-                if (aExact && !bExact) return -1;
-                if (!aExact && bExact) return 1;
-                return 0;
-            });
+            const scoredMatches = searchDataset.map(item => {
+                const titleLower = item.title.toLowerCase();
+                const catLower = item.category.toLowerCase();
+                const pageLower = item.page.toLowerCase();
+                const allKeywords = item.keywords.map(k => k.toLowerCase());
 
-            renderResults(matches);
+                let score = 0;
+
+                if (titleLower === query || allKeywords.includes(query)) score += 100;
+                if (titleLower.includes(query)) score += 50;
+                if (catLower.includes(query) || pageLower.includes(query)) score += 30;
+
+                tokens.forEach(token => {
+                    if (titleLower.includes(token)) score += 20;
+                    if (catLower.includes(token)) score += 15;
+                    if (pageLower.includes(token)) score += 15;
+                    if (allKeywords.some(k => k.includes(token))) score += 25;
+                });
+
+                return { item, score };
+            })
+            .filter(entry => entry.score > 0)
+            .sort((a, b) => b.score - a.score)
+            .map(entry => entry.item);
+
+            renderResults(scoredMatches, query);
         }
 
-        function renderResults(results) {
+        function renderResults(results, query) {
             searchResults.innerHTML = '';
             if (results.length === 0) {
-                searchResults.innerHTML = `<div class="px-4 py-4 text-center text-sm font-semibold text-neutral-500">No matching service found.</div>`;
+                searchResults.innerHTML = `
+                    <div class="px-4 py-5 text-center space-y-2">
+                        <p class="text-xs sm:text-sm font-bold text-slate-600">No exact match for "${escapeHTML(query)}"</p>
+                        <div class="flex flex-wrap justify-center gap-2 pt-1">
+                            <a href="government.html" class="clay-pill px-3 py-1 text-[11px] font-bold text-blue-700">Browse Government</a>
+                            <a href="documents.html" class="clay-pill px-3 py-1 text-[11px] font-bold text-emerald-700">Browse Documents</a>
+                            <a href="education.html" class="clay-pill px-3 py-1 text-[11px] font-bold text-amber-700">Browse Education</a>
+                        </div>
+                    </div>`;
             } else {
-                results.slice(0, 7).forEach(item => {
+                results.slice(0, 8).forEach(item => {
+                    const badgeColor = item.category === 'Government'
+                        ? 'bg-amber-100 text-amber-800'
+                        : item.category === 'Education'
+                        ? 'bg-blue-100 text-blue-800'
+                        : item.category === 'Documents'
+                        ? 'bg-emerald-100 text-emerald-800'
+                        : 'bg-purple-100 text-purple-800';
+
                     const itemEl = document.createElement('a');
                     itemEl.href = item.page;
-                    itemEl.className = 'flex items-center justify-between p-3 rounded-xl hover:bg-neutral-100 transition-colors focus:bg-neutral-100 focus:outline-none group';
+                    itemEl.className = 'flex items-center justify-between p-3 rounded-2xl hover:bg-blue-50/70 active:bg-blue-100/70 transition-colors focus:outline-none group';
                     itemEl.innerHTML = `
-                        <div class="flex flex-col">
-                            <span class="text-sm font-bold text-neutral-900 group-hover:text-blue-600 transition-colors">${escapeHTML(item.title)}</span>
-                            <span class="text-[11px] font-semibold text-neutral-500">${escapeHTML(item.category)} Hub</span>
+                        <div class="flex flex-col pr-2">
+                            <span class="text-xs sm:text-sm font-extrabold text-slate-900 group-hover:text-blue-700 transition-colors">${escapeHTML(item.title)}</span>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${escapeHTML(item.category)}</span>
+                                <span class="text-[10px] font-semibold text-slate-400">${escapeHTML(item.page)}</span>
+                            </div>
                         </div>
-                        <div class="text-neutral-400 group-hover:text-blue-600 transition-colors">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <div class="clay-pill w-8 h-8 flex items-center justify-center text-slate-500 group-hover:text-blue-700 flex-shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.4">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
@@ -676,7 +1231,7 @@ body {
         }
 
         document.addEventListener('click', (e) => {
-            if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+            if (!searchInput.contains(e.target) && !searchResults.contains(e.target) && !e.target.closest('.quick-chip')) {
                 searchResults.classList.add('hidden');
             }
         });
@@ -686,6 +1241,75 @@ body {
                 searchResults.classList.remove('hidden');
             }
         });
+
+        /* ------------------------------------------
+           3. WATER RIPPLE CLICK EFFECT ON BOTTOM DOCK
+           ------------------------------------------ */
+        const bottomNavigation = document.querySelector('nav[aria-label="Bottom Navigation"]');
+        if (bottomNavigation) {
+            bottomNavigation.addEventListener("click", function(e) {
+                const target = e.target.closest("a, button");
+                if (!target || !bottomNavigation.contains(target)) return;
+
+                const rect = target.getBoundingClientRect();
+                const ripple = document.createElement("span");
+                ripple.className = "water-ripple-wave";
+                ripple.style.left = (e.clientX - rect.left) + "px";
+                ripple.style.top = (e.clientY - rect.top) + "px";
+                target.appendChild(ripple);
+
+                setTimeout(() => ripple.remove(), 650);
+
+                if (
+                    target.tagName === "A" &&
+                    e.button === 0 &&
+                    !e.ctrlKey &&
+                    !e.metaKey &&
+                    !e.shiftKey &&
+                    !e.altKey &&
+                    (!target.target || target.target === "_self")
+                ) {
+                    e.preventDefault();
+                    const destination = target.href;
+                    setTimeout(() => {
+                        window.location.href = destination;
+                    }, 260);
+                }
+            });
+        }
+
+        /* ------------------------------------------
+           4. SLIDE-OVER CLAY NAVIGATION DRAWER
+           ------------------------------------------ */
+        const menuToggleBtn = document.getElementById('menuToggleBtn');
+        const bottomMoreBtn = document.getElementById('bottomMoreBtn');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        const navDrawerBackdrop = document.getElementById('navDrawerBackdrop');
+        const navDrawerPanel = document.getElementById('navDrawerPanel');
+
+        function openDrawer() {
+            navDrawerBackdrop.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                navDrawerBackdrop.classList.remove('opacity-0');
+                navDrawerPanel.classList.remove('translate-x-[110%]');
+            });
+        }
+
+        function closeDrawer() {
+            navDrawerBackdrop.classList.add('opacity-0');
+            navDrawerPanel.classList.add('translate-x-[110%]');
+            setTimeout(() => {
+                navDrawerBackdrop.classList.add('hidden');
+            }, 260);
+        }
+
+        menuToggleBtn.addEventListener('click', openDrawer);
+        bottomMoreBtn.addEventListener('click', openDrawer);
+        closeDrawerBtn.addEventListener('click', closeDrawer);
+        navDrawerBackdrop.addEventListener('click', (e) => {
+            if (e.target === navDrawerBackdrop) closeDrawer();
+        });
     </script>
 </body>
 </html>
+```
